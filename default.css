@@ -1,0 +1,28 @@
+body {
+	font-family: Georgia;
+}
+
+h1 {
+	font-family: Serif;
+}
+
+a {
+	font-family: Consolas;
+	text-decoration: none;
+}
+
+a:link {
+	color: black;
+}
+
+a:visited {
+	color: gray;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	color: red;
+}

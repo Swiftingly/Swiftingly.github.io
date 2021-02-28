@@ -1,6 +1,3 @@
-function beep() {
-	console.log("precise");
-}
 const dirs = [[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]];
 var rows = [];
 var width = 0, height = 0;
@@ -29,7 +26,6 @@ function draw(positions) {
 		ctx.moveTo(0, i * ySpace);
 		ctx.lineTo(600, i * ySpace);
 	}
-	//ctx.closePath();
 	ctx.stroke();
 	
 	
