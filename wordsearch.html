@@ -8,19 +8,22 @@
 </head>
 
 <body>
-	<div align="center">
+	<div align="center" style="float:left; width:50%;">
 		<h1>Word Search</h1>
-		<textarea rows="12" cols="12" id="grid" placeholder="Enter full grid.."></textarea>
-		<br>
-		<canvas id="wordSearch" width="600" height="600"></canvas>
+		
 		<br>
 		<form onsubmit="return solve();">
+			<textarea rows="12" cols="12" id="grid"></textarea>
+			<br>
 			<label>Find word:</label>
 			<input id="word" type="text" pattern="[a-zA-Z\?]{2,}"></input>
 			<button>Solve</button>
 		</form>
 		<h2>Words</h2>
 		<p id="words"></p>
+	</div>
+	<div align="center" style="margin-left: 50%;">
+		<canvas id="wordSearch" width="600" height="600"></canvas>
 	</div>
 </body>
 
