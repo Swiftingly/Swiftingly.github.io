@@ -1,5 +1,5 @@
 'use strict';
-//(() => {
+(() => {
 
 function getSelection() {
 	return document.getSelection().toString();
@@ -13,6 +13,10 @@ output.addEventListener('copy', (e) => {
 	
 	e.preventDefault();
 });
+
+const regNum = /^\d+$/;
+const regFrac = /^(\d+)\/(\d+)$/;
+const regFloat = /^(\d+)\.(\d+)$/;
 
 const table = document.getElementById('points');
 
@@ -78,6 +82,11 @@ function newDeleteButton() {
 }
 
 useButton.addEventListener('click', () => {
+	if (!(
+		(regNum.test(xinput.value) || regFrac.test(xinput.value) || regFloat.test(xinput.value)) &&
+		(regNum.test(yinput.value) || regFrac.test(yinput.value) || regFloat.test(yinput.value))
+		)) return;
+	
 	if (selectedRow) {
 		selectedRow.children[0].innerHTML = xinput.value;
 		selectedRow.children[1].innerHTML = yinput.value;
@@ -105,13 +114,9 @@ useButton.addEventListener('click', () => {
 });
 
 function getFrac(str) {
-	const regNum = /^\d+$/;
 	if (regNum.test(str)) {
 		return new Frac(parseInt(str));
 	}
-	
-	const regFrac = /^(\d+)\/(\d+)$/;
-	const regFloat = /^(\d+)\.(\d+)$/;
 	
 	var match = str.match(regFrac);
 	if (match != null) {
@@ -266,10 +271,9 @@ function polyOutput(poly) {
 			if (poly[i].equals(zeroFrac)) continue;
 			if (i == 0) out.push(poly[i].num * m / poly[i].den);
 			else {
-				var co;
+				var co = poly[i].num * m / poly[i].den;
 				if (co == 1n) co = '';
 				else if (co == -1n) co = '-';
-				else co = poly[i].num * m / poly[i].den;
 				if (i == 1) out.push(co + "x");
 				else out.push(co + "x<sup>" + i + "</sup>");
 			}
@@ -309,4 +313,4 @@ function solve(points) {
 	return poly;
 }
 
-//})();
+})();

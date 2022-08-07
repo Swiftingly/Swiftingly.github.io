@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+	<filter id="blur">
+		<feGaussianBlur in="SourceGraphic" stdDeviation="0.5" />
+	</filter>
+	
+	<text x="0" y="14" font-weight="bold" font-family="calibri" font-size="17" fill="#0000FF">W</text>
+	<text x="0" y="14" font-weight="bold" font-family="calibri" font-size="17" fill="#00FFFF" filter="url(#blur)">W</text>
+</svg>
