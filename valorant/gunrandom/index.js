@@ -29,6 +29,11 @@ var credits = document.getElementById('credits');
 credits.addEventListener('change', () => {
 	credits.value = Math.clamp(Math.round(credits.value / 50) * 50, 0, 9000);
 });
+credits.addEventListener('wheel', (e) => {
+	credits.value = credits.value - Math.sign(e.deltaY) * 50;
+	credits.value = Math.clamp(Math.round(credits.value / 50) * 50, 0, 9000);
+	e.preventDefault();
+});
 
 const priceList = {
 	CLASSIC : 0,
@@ -84,21 +89,15 @@ for (var element of document.querySelectorAll('.category h2')) {
 			selectedGuns = removeList(selectedGuns, guns);
 			for (const name of guns) {
 				deselect(elements[name]);
-				//elements[name].style['background-color'] = '#FF000080';
-				//elements[name].style['color'] = 'black';
 			}
 			deselect(e.target);
-			//e.target.style.opacity = "0.4";
 		}
 		else {
 			addList(selectedGuns, guns);
 			for (const name of guns) {
 				select(elements[name]);
-				//elements[name].style['background-color'] = null;
-				//elements[name].style['color'] = null;
 			}
 			select(e.target);
-			//e.target.style.opacity = null;
 		}
 	});
 	
