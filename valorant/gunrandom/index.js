@@ -18,13 +18,19 @@ function removeList(a, b) {
 function remove(a, b) {
 	return a.filter(e => e != b);
 }
+function getCategory(gun) {
+	for (const cat in gunList) {
+		if (gunList[cat].includes(gun)) return cat;
+	}
+	return '';
+}
 
 var credits = document.getElementById('credits');
 credits.addEventListener('change', () => {
 	credits.value = Math.clamp(Math.round(credits.value / 50) * 50, 0, 9000);
 });
 
-var priceList = {
+const priceList = {
 	CLASSIC : 0,
 	SHORTY  : 150,
 	FRENZY  : 450,
@@ -48,8 +54,7 @@ var priceList = {
 	ARES    : 1600,
 	ODIN    : 3200
 }
-
-var gunList = {
+const gunList = {
 	SIDEARMS       : ['CLASSIC', 'SHORTY', 'FRENZY', 'GHOST', 'SHERIFF'],
 	SMGS           : ['STINGER', 'SPECTRE',],
 	SHOTGUNS       : ['BUCKY', 'JUDGE'],
@@ -62,6 +67,13 @@ var elements = {};
 
 var selectedGuns = Object.keys(priceList);
 
+function select(e) {
+	e.style.opacity = null;
+}
+function deselect(e) {
+	e.style.opacity = "0.3";
+}
+
 // Category Loop
 for (var element of document.querySelectorAll('.category h2')) {
 	elements[element.innerText] = element;
@@ -71,16 +83,22 @@ for (var element of document.querySelectorAll('.category h2')) {
 		if (intersect(selectedGuns, guns)) {
 			selectedGuns = removeList(selectedGuns, guns);
 			for (const name of guns) {
-				elements[name].style['background-color'] = '#FF000080';
-				elements[name].style['color'] = 'black';
+				deselect(elements[name]);
+				//elements[name].style['background-color'] = '#FF000080';
+				//elements[name].style['color'] = 'black';
 			}
+			deselect(e.target);
+			//e.target.style.opacity = "0.4";
 		}
 		else {
 			addList(selectedGuns, guns);
 			for (const name of guns) {
-				elements[name].style['background-color'] = null;
-				elements[name].style['color'] = null;
+				select(elements[name]);
+				//elements[name].style['background-color'] = null;
+				//elements[name].style['color'] = null;
 			}
+			select(e.target);
+			//e.target.style.opacity = null;
 		}
 	});
 	
@@ -90,37 +108,54 @@ for (var element of document.querySelectorAll('.category h2')) {
 for (var element of document.querySelectorAll('.category p')) {
 	elements[element.innerText] = element;
 	
-	//gunList[element.innerText] = element;
 	element.addEventListener('click', (e) => {
 		var gun = e.target.innerText;
+		
 		if (!selectedGuns.includes(gun)) {
 			selectedGuns.push(gun);
-			e.target.style['background-color'] = null;
-			e.target.style['color'] = null;
+			select(e.target);
 		}
 		else {
 			selectedGuns = remove(selectedGuns, gun);
-			e.target.style['background-color'] = '#FF000080';
-			e.target.style['color'] = 'black';
+			deselect(e.target);
+		}
+		
+		var category = getCategory(gun);
+		if (intersect(selectedGuns, gunList[category])) {
+			select(elements[category]);
+		}
+		else {
+			deselect(elements[category]);
 		}
 	});
 }
 
 var button = document.getElementById('randomize');
+var clickoff = document.getElementById('clickoff');
 var output = document.getElementById('output');
 
 button.addEventListener('click', () => {
 	var guns = selectedGuns.filter(e => parseInt(credits.value) >= priceList[e]);
 	if (guns.length <= 0) {
-		output.innerText = "You cannot afford any guns";
+		if (selectedGuns.length > 0) output.innerHTML = "<u>CAN'T AFFORD</u>";
+		else output.innerHTML = "<u>NO GUNS</u>";
 	}
 	else {
-		output.innerText = guns[Math.floor(Math.random() * guns.length)];
-		
-		output.style.animation = 'none';
-		output.offsetHeight;
-		output.style.animation = null;
+		var gun = guns[Math.floor(Math.random() * guns.length)];
+		output.innerText = gun;
+		if (clickoff.checked) {
+			selectedGuns = remove(selectedGuns, gun);
+			deselect(elements[gun]);
+			
+			var category = getCategory(gun);
+			if (!intersect(selectedGuns, gunList[category])) {
+				deselect(elements[category]);
+			}
+		}
 	}
+	output.style.animation = 'none';
+	output.offsetHeight;
+	output.style.animation = null;
 });
 
 })();

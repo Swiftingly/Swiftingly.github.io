@@ -17,7 +17,7 @@ div {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-h1, h2 {
+p, h1, h2 {
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -26,9 +26,9 @@ input[type="number"] {
 	font-family: Tungsten-Bold;
 	text-align: center;
 	background-color: #382531;
-	font-size: 18pt;
-	width: 64px;
-	height: 32px;
+	font-size: 24pt;
+	width: 80px;
+	height: 40px;
 	checked: true;
 	border: 2px solid #ECE8E1;
 	color: #ECE8E1;
@@ -37,6 +37,17 @@ input[type="number"] {
 input[type="number"]:focus {
 	outline: none;
 }
+input[type="checkbox"] + label {
+	color: #B0B0B0;
+	text-shadow: 2px 2px 4px black;
+}
+input[type="checkbox"] {
+	width: 24px;
+	height: 24px;
+	box-shadow: 2px 2px 4px black;
+	
+}
+
 #container {
 	margin: auto;
 	display: flex;
@@ -48,6 +59,8 @@ input[type="number"]:focus {
 }
 #container p {
 	background-color: #FFFFFF19;
+	margin-top: 8px;
+	margin-bottom: 8px;
 	/*border: 1px solid #FFFFFF;*/
 }
 .category {
@@ -69,6 +82,7 @@ input[type="number"]:focus {
 }
 #output {
 	animation: click 0.5s linear;
+	font-size: 64pt;
 }
 button {
 	font-family: Arial;
