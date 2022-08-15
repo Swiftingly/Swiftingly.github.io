@@ -2,30 +2,48 @@
 	font-family: Tungsten-Bold;
 	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
 }
-
+/*@keyframes back {
+	0% { background-position: 0% 0%; }
+	25% { background-position: 0% -100%; }
+	50% { background-position: -100% -100%; }
+	75% { background-position: -100% 0%; }
+	100% { background-position: 0% 0%; }
+}*/
+/*html {
+	height: 100%;
+	animation: back 10s linear infinite;
+	background-size: 200% 200%;
+	/*background-position: 0% 0%;
+	background-image: radial-gradient(circle at top left, #55384B 0, white 100%);
+}*/
 html, body {
 	font-family: Tungsten-Bold;
 	font-size: xx-large;
 	margin: auto;
 	text-align: center;
 	background-color: #55384B;
+	
 	color: #ECE8E1;
 	text-rendering: optimizeLegibility;
 }
-h1 {
+h1, p {
 	margin-top: 40px;
 	margin-bottom: 0;
 }
+#output-title {
+	margin-top: 80px;
+	font-size: 80pt;
+	cursor: pointer;
+	color: #FF4558;
+}
 @keyframes click {
-	0% { transform: rotate(0deg); color: black; }
-	100% { transform: rotate(360deg); color: #ECE8E1; }
+	0% { opacity: 0; transform: translate(0, 60px); }
+	100% { opacity: 1; }
 }
 #output {
 	display: inline-block;
 	font-size: 60pt;
-	text-shadow: 0px 0px 16px black;
-	margin-top: 120px;
-	animation: click 1s linear;
+	animation: click 1s ease;
 	cursor: pointer;
 	user-select: none;
 	-webkit-user-select: none;
