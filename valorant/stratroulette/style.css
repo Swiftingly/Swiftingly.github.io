@@ -26,15 +26,62 @@ html, body {
 	color: #ECE8E1;
 	text-rendering: optimizeLegibility;
 }
-h1, p {
+div {
+	width: 80%;
+	margin: auto;
+}
+h1, p, button {
 	margin-top: 40px;
 	margin-bottom: 0;
 }
-#output-title {
-	margin-top: 80px;
-	font-size: 80pt;
+button {
+	font-family: Tungsten-Bold;
+	font-size: xx-large;
+	background-color: transparent;
+	color: #ECE8E1;
+	transition: 0.5s;
+	
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent;
+	
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+label, button:hover {
 	cursor: pointer;
+	border-color: #ECE8E1;
+}
+#input {
+	display: flex;
+}
+#input div {
+	display: flex;
+}
+input[type="radio"] {
+	margin: auto;
+	display: none;
+}
+input[type="radio"]:checked+label {
 	color: #FF4558;
+	border-bottom: 2px solid #FF4558;
+}
+label {
+	border-bottom: 2px solid transparent;
+	margin: auto;
+	font-size: 36pt;
+	transition: 0.2s;
+}
+label {
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+#output-title {
+	font-size: 80pt;
+	color: #FF4558;
+	text-transform: uppercase;
 }
 @keyframes click {
 	0% { opacity: 0; transform: translate(0, 60px); }
@@ -44,8 +91,4 @@ h1, p {
 	display: inline-block;
 	font-size: 60pt;
 	animation: click 1s ease;
-	cursor: pointer;
-	user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
 }
