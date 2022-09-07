@@ -45,7 +45,7 @@ const bothStrats = [
 ];*/
 const defendStrats = [
 	'Bomb Squad:Your team waits at spawn until the enemy team plants the spike. You are then allowed to leave spawn and play normally',
-	'Coach:The bottom frag on your team must hide at spawn and give callouts, and no one else is allowed to talk',
+	'Coach:The bottom frag on your team must hide at spawn and give callouts, no one else is allowed to talk',
 	'I call shotgun:Everyone must buy either Judge, Bucky, or Shorty if they can afford it in that order, and hold close angles on a site',
 	'Gambling:Your entire team must stay at 1 site and hope they picked the right one. After contact or spike planted they are allowed to leave'
 ];
@@ -54,7 +54,7 @@ const attackStrats = [
 	'Protect the president:The bottom frag is the President, and they are the only one allowed to plant the spike and they cannot use guns. '+
 	'The team must surround the President and protect them for the entire around',
 	'Odin Rush:Everyone must buy either Odin, Ares, or Frenzy if they can afford it, in that order'
-]
+];
 const bothStrats = [
 	'Motivational speech:One player on your team must give a speech at the beginning of the round. No one can leave spawn until they finish',
 	'Knives Out: You can only move when you are holding your knife',
@@ -68,8 +68,9 @@ const bothStrats = [
 	'Swap Meet:Every time you get a kill, you must take their gun and use it for the next kill',
 	'How low can you go:Play the entire game crouched',
 	'O/KAY:No one on your team is allowed to use abilities',
-	'Casters:Every dead player must narrate the alive players actions like a professional. Alive players can\'t talk'
-]
+	'Casters:Every dead player must narrate the alive players actions like a caster. Alive players can\'t talk',
+	'Peace Keeper:You can\'t shoot first'
+];
 
 var side = '';
 

@@ -17,7 +17,7 @@
 	background-image: radial-gradient(circle at top left, #55384B 0, white 100%);
 }*/
 html, body {
-	font-family: Tungsten-Bold;
+	font-family: Tungsten-Bold, Arial;
 	font-size: xx-large;
 	margin: auto;
 	text-align: center;
@@ -35,7 +35,7 @@ h1, p, button {
 	margin-bottom: 0;
 }
 button {
-	font-family: Tungsten-Bold;
+	font-family: Tungsten-Bold, Arial;
 	font-size: xx-large;
 	background-color: transparent;
 	color: #ECE8E1;

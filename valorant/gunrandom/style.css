@@ -4,7 +4,7 @@
 }
 
 html, body {
-	font-family: Tungsten-Bold;
+	font-family: Tungsten-Bold, Arial;
 	font-size: xx-large;
 	margin: auto;
 	text-align: center;
@@ -23,11 +23,11 @@ p, h1, h2 {
 }
 
 input[type="number"] {
-	font-family: Tungsten-Bold;
+	font-family: Tungsten-Bold, Arial;
 	text-align: center;
 	background-color: #382531;
 	font-size: 24pt;
-	width: 80px;
+	width: 72pt;
 	height: 40px;
 	checked: true;
 	border: 2px solid #ECE8E1;
