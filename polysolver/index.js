@@ -7,9 +7,9 @@ function getSelection() {
 
 var output = document.getElementById("poly");
 output.addEventListener('copy', (e) => {
-	if (desmos.checked)
-		e.clipboardData.setData('text/plain', getSelection().replace(/(\d+)\/(\d+)/g, "\\frac{$1}{$2}").replace(/x(\d+)/g, "x^{$1}"));
-	else e.clipboardData.setData('text/plain', getSelection().replace(/x(\d+)/g, "x^$1"));
+	//if (desmos)
+	//	e.clipboardData.setData('text/plain', getSelection().replace(/(\d+)\/(\d+)/g, "\\frac{$1}{$2}").replace(/x(\d+)/g, "x^{$1}"));
+	e.clipboardData.setData('text/plain', getSelection().replace(/x(\d+)/g, "x^$1"));
 	
 	e.preventDefault();
 });
@@ -21,12 +21,13 @@ const regFloat = /^(\d+)\.(\d+)$/;
 const table = document.getElementById('points');
 
 const format = document.getElementById('format');
-const desmos = document.getElementById('desmos');
 
 const xinput = document.getElementById('xinput');
 const yinput = document.getElementById('yinput');
 
 const useButton = document.getElementById('use');
+
+const copy = document.getElementById('copy');
 
 var selectedRow = null;
 
@@ -142,6 +143,12 @@ document.getElementById('solve').addEventListener('click', () => {
 	
 	var poly = solve(pointList);
 	output.innerHTML = polyOutput(poly);
+	
+	copy.style.display = null;
+});
+document.getElementById('copy').addEventListener('click', () => {
+	var copyText = output.innerText.replace(/(\d+)\/(\d+)/g, "\\frac{$1}{$2}").replace(/x(\d+)/g, "x^{$1}");
+	navigator.clipboard.writeText(copyText);
 });
 
 function gcd(a, b) {

@@ -17,6 +17,8 @@
 	<div id="main">
 		
 		<h1>Points</h1>
+		<p>Input a set of points, using integers, decimals, or even fractions</p>
+		<p>E.g. 5, -4 | 2/3, 3.2</p>
 		<table id="points">
 			<tr>
 				<td>X</td>
@@ -30,13 +32,14 @@
 			</tr>
 		</table>
 		<br>
-		<label>Simplified Fraction</label><input type="checkbox" id="format"><br>
-		<label>Desmos Copy</label><input type="checkbox" id="desmos"><br>
+		<label>No fraction coefficients</label><input type="checkbox" id="format"><br>
+		<!--<label>Desmos Copy</label><input type="checkbox" id="desmos"><br>-->
 		<br>
 		<button id="solve">Solve</button>
 		
 		<br>
-		<p id="poly"></p>
+		<h2 id="poly"></h2>
+		<button id="copy" style="display: none;">Copy Desmos Format</button>
 	</div>
 </body>
 </html>

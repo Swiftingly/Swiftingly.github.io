@@ -1,13 +1,7 @@
 'use strict';
 (() => {
 
-var workerLoaded = false;
-
 // Image input elements
-const progress = document.getElementById("progress");
-
-const imageInput = document.getElementById("image");
-const loadButton = document.getElementById("load");
 
 // Input elements
 const widthInput = document.getElementById("width");
@@ -17,6 +11,7 @@ const boardInput = document.getElementById("board-input");
 var solveMode = 0;
 
 const solveModeInput = document.getElementsByName("solve-mode");
+const minLength = document.getElementById("min-length");
 
 const wordInput = document.getElementById("word-input");
 
@@ -24,7 +19,6 @@ const wordInput = document.getElementById("word-input");
 for (const element of solveModeInput) {
 	element.addEventListener('click', (e) => {
 		solveMode = e.target.value;
-		console.log(solveMode);
 		
 		if (solveMode == 0) {
 			wordInput.classList.add('hidden');
@@ -44,52 +38,9 @@ const boardAnswers = document.getElementById("board-answers");
 const ctx = board.getContext('2d', { alpha: false });
 const overCtx = board.getContext('2d');
 
-const worker = Tesseract.createWorker({
-	logger: m => {
-		console.log(m);
-		if (m.status === 'recognizing text' && m.progress) {
-			progress.style.width = m.progress * 100 + '%';
-		}
-	}
-});
-
-(async() => {
-	await worker.load();
-	
-	await worker.loadLanguage('eng');
-	await worker.initialize('eng');
-	await worker.setParameters({
-		tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-	});
-	workerLoaded = true;
-})();
-
-window.onbeforeunload = (e) => {
-	if (workerLoaded) worker.terminate();
-	return null;
-}
-
-window.addEventListener('paste', (e) => {
-	imageInput.files = e.clipboardData.files;
-});
-
-loadButton.addEventListener('click', () => {
-	if (imageInput.files[0]) {
-		worker.recognize(imageInput.files[0]).then((output) => {
-			console.log("done");
-			var text = [];
-			for (const line of output.data.lines) {
-				text.push(line.text.slice(0, widthInput.value));
-			}
-			boardInput.value = text.join('\n');
-			changeInput();
-		});
-	}
-});
-
 function changeInput() {
 	boardInput.value = boardInput.value.split('')
-		.filter(c => /[A-Za-z\n]/.test(c)).join('')
+		.filter(c => /[A-Za-z\?\n]/.test(c)).join('')
 		.toUpperCase();
 }
 
@@ -107,7 +58,7 @@ boardInput.addEventListener('input', () => {
 });
 wordInput.addEventListener('input', () => {
 	wordInput.value = wordInput.value.split('')
-		.filter(c => /[A-Za-z\n]/.test(c)).join('');
+		.filter(c => /[A-Za-z\?\n]/.test(c)).join('');
 });
 
 function drawBoard(grid) {
@@ -154,7 +105,6 @@ function drawAnswers(answers) {
 		var x = margin + cellSize * (answer[0] + 0.5);
 		var y = margin + cellSize * (answer[1] + 0.5);
 		var angle = angles[answer[2]];
-		//console.log(answer[2]);
 		overCtx.moveTo(x, y);
 		overCtx.lineTo(x + Math.cos(angle) * 30, y + Math.sin(angle) * 30);
 		overCtx.moveTo(x + 30, y);
@@ -181,14 +131,15 @@ solveButton.addEventListener('click', async () => {
 	else {
 		words = wordInput.value.toUpperCase();
 	}
-	words = words.split(/\r?\n/).filter(w => w.length >= 3);
+	words = words.split(/\r?\n/);
+	if (solveMode == 0) words = words.filter(w => w.length >= minLength.value);
 	var grid = boardInput.value.split('\n');
 	
 	if (words < 1) {
 		alert("No words selected");
 		return;
 	}
-	if (grid.length != heightInput.value || grid.some(e => !new RegExp(`[A-Z]{${widthInput.value}}`).test(e))) {
+	if (grid.length != heightInput.value || grid.some(e => !new RegExp(`[A-Z\?]{${widthInput.value}}`).test(e))) {
 		alert("Invalid grid");
 		return;
 	}
@@ -204,7 +155,7 @@ function contWord (grid,word,wordPos,x,y,dir) {
 	x += dir[0];
 	y += dir[1];
 	if (!(x >= 0 && x < gridWidth && y >= 0 && y < gridHeight)) return false;
-	if (word[wordPos] === grid[y][x]) {
+	if (grid[y][x] === word[wordPos] || word[wordPos] === '?') {
 		if (word.length-1 === wordPos) return true;
 		return contWord(grid,word,wordPos+1,x,y,dir);
 	}
@@ -219,11 +170,10 @@ function wordSearch(grid,words) {
 		for (let y = 0; y < gridHeight; y++) {
 			for (let w = 0; w < words.length; w++) {
 				let word = words[w];
-				if (word[0] === grid[y][x]) {
+				if (word[0] === grid[y][x] || word[0] === '?') {
 					for (let d = 0; d < dirs.length; d++) {
 						if (contWord(grid,word,1,x,y,dirs[d]))
-							answers.push([x, y, d]);
-							//console.log(`${word} - (${String(x+1)}, ${String(y+1)}, ${d})`);
+							answers.push([x, y, d, word.length]);
 					}
 				}
 			}

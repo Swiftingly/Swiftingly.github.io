@@ -5,6 +5,7 @@ html, body {
 	font-weight: bold;
 	background-color: #08080D;
 	color: white;
+	letter-spacing: 1px;
 }
 
 #main {
@@ -22,6 +23,7 @@ button:hover {
 }
 
 input[type='text'] {
+	outline: none;
 	width: 80px;
 	height: 40px;
 	font-family: Arial;
@@ -63,14 +65,14 @@ td {
 	color: black;
 }
 
-#solve {
+#solve, #copy {
 	padding: 8px;
 	border: 2px solid #808080;
 	background-color: #F0F0F0;
 }
-#solve:hover {
+#solve:hover, #copy:hover {
 	background-color: #D0D0D0;
 }
-#solve:active {
+#solve:active, #copy:active {
 	background-color: #B0B0B0;
 }

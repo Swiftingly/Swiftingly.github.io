@@ -9,6 +9,27 @@ html, body {
 .hidden {
 	display: none;
 }
+@keyframes title {
+	0% {
+		text-shadow: 2px 2px hsl(0, 100%, 50%);
+	}
+	25% {
+		text-shadow: -2px 2px hsl(90, 100%, 50%);
+	}
+	50% {
+		text-shadow: -2px -2px hsl(180, 100%, 50%);
+	}
+	75% {
+		text-shadow: 2px -2px hsl(270, 100%, 50%);
+	}
+	100% {
+		text-shadow: 2px 2px hsl(360, 100%, 50%);
+	}
+}
+h1 {
+	animation: title 1s linear infinite;
+}
+
 div {
 	margin: 4px;
 	margin-left: auto;
@@ -38,6 +59,9 @@ div {
 	font-family: Lucida Console, Monospace;
 	overflow: scroll;
 }
+textarea, input {
+	outline: none;
+}
 input {
 	margin: 6px;
 }
@@ -45,9 +69,7 @@ input[type='number'] {
 	width: 36px;
 	height: 16px;
 }
-#static {
-	position: relative;
-}
 canvas {
 	position: absolute;
+	transform: translate(-50%, 0);
 }
