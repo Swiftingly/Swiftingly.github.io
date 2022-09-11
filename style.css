@@ -42,19 +42,9 @@ a:active {
 	font-style: italic;
 }
 
-@keyframes slidein {
-	from {
-		margin-left: 0;
-	}
-	to {
-		margin-left: 80%;
-	}
-}
-
 #mike {
 	color: #00FFFF;
 	text-shadow: none;
-	animation: 2s ease-in-out infinite alternate slidein;
 }
 #mike:hover {
 	color: #00CCCC;
