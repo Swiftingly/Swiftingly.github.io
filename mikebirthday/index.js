@@ -1,3 +1,6 @@
+'use strict';
+(() => {
+
 console.log("mike!");
 
 const canvas1 = document.getElementById("canvas1");
@@ -6,27 +9,31 @@ const img = document.getElementById("img");
 const ctx1 = canvas1.getContext('2d');
 const ctx2 = canvas2.getContext('2d');
 
-ctx1.fillStyle = "black";
-ctx2.fillStyle = "#00ffff80";
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const word = "25dollarvalorantgiftcard".toUpperCase();
 
-ctx2.strokeStyle = "#00ffff80";
-ctx2.lineWidth = 40;
-
-var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var word = "25dollarvalorantgiftcard".toUpperCase();
-
-ctx1.font = "bold 24px Arial";
-ctx1.textAlign = "center";
-
-var tile = 900 / 24;
-
-for (var y = 0; y < 24; y++) {
-	for (var x = 0; x < 24; x++) {
-		if (y != 5) ctx1.fillText(letters[Math.floor(Math.random() * letters.length)], 50 + x * tile, 50 + y * tile);
-		else {
-			ctx1.fillText(word[x], 50 + x * tile, 50 + y * tile);
-		}
-	}
+function resize(w, h) {
+	const s = Math.min(w, h);
+	
+	canvas1.width = s;
+	canvas1.height = s;
+	canvas2.width = s;
+	canvas2.height = s;
+	
+	margin = s * 0.05;
+	tile = s * 0.9 / 24;
+	tileHalf = tile * 0.5;
+	
+	ctx1.fillStyle = "black";
+	ctx1.font = "bold " + (tile * 0.7) + "px Arial";
+	ctx1.textAlign = "center";
+	ctx1.textBaseline = "middle";
+	
+	ctx2.fillStyle = "#00ffff80";
+	ctx2.strokeStyle = "#00ffff80";
+	ctx2.lineWidth = 40;
+	
+	
 }
 
 var click = false;
@@ -34,33 +41,68 @@ var startClick = false;
 var startX = 0;
 var startY = 0;
 
+var margin = canvas1.width * 0.05;
+var tile = canvas1.width * 0.9 / 24;
+var tileHalf = tile * 0.5;
+
+var grid = [];
+
+function draw() {
+	for (var y = 0; y < 24; y++) {
+		if (grid[y] == undefined) grid[y] = [];
+		for (var x = 0; x < 24; x++) {
+			if (grid[y][x] == undefined) grid[y][x] = letters[Math.floor(Math.random() * letters.length)];
+			
+			if (y != 5) ctx1.fillText(grid[y][x], margin + x * tile, margin + y * tile);
+			else {
+				ctx1.fillText(word[x], margin + x * tile, margin + y * tile);
+			}
+		}
+	}
+}
+
+resize(window.innerWidth, window.innerHeight);
+draw();
+
+addEventListener('resize', () => {
+	resize(window.innerWidth, window.innerHeight);
+	draw();
+});
+
 canvas1.addEventListener("pointerdown", (e) => {
+	var rect = e.target.getBoundingClientRect();
+	var x = e.clientX - rect.left;
+	var y = e.clientY - rect.top;
+	
 	click = true;
-	if (e.clientX > 30 && e.clientX < 70 && e.clientY > 30 + 5 * tile && e.clientY < 70 + 5 * tile) {
+	if (x > margin - tileHalf && x < margin + tileHalf && y > margin - tileHalf + 5 * tile && y < margin + tileHalf + 5 * tile) {
 		startClick = true;
 	}
-	startX = e.clientX;
-	startY = e.clientY;
+	startX = x;
+	startY = y;
 	e.preventDefault();
 });
 canvas1.addEventListener("pointermove", (e) => {
-	if (e.clientX > 30 && e.clientX < 70 && e.clientY > 30 + 5 * tile && e.clientY < 70 + 5 * tile) {
-		ctx2.fillRect(30, 30 + 5 * tile, 40, 40);
-		startClick = true;
-	}
+	var rect = e.target.getBoundingClientRect();
+	var x = e.clientX - rect.left;
+	var y = e.clientY - rect.top;
+	
 	ctx2.clearRect(0, 0, 1000, 1000);
 	if (click) {
 		ctx2.beginPath();
 		ctx2.moveTo(startX, startY);
-		ctx2.lineTo(e.clientX, e.clientY);
+		ctx2.lineTo(x, y);
 		ctx2.stroke();
 	}
 	e.preventDefault();
 });
 canvas1.addEventListener("pointerup", (e) => {
+	var rect = e.target.getBoundingClientRect();
+	var x = e.clientX - rect.left;
+	var y = e.clientY - rect.top;
+	
 	click = false;
-	if (startClick && e.clientX > 30 + tile * 23 && e.clientX < 70 + tile * 23 && e.clientY > 30 + 5 * tile && e.clientY < 70 + 5 * tile) {
-		ctx2.fillRect(30 + tile * 23, 30 + 5 * tile, 40, 40);
+	if (startClick && x > margin  - tileHalf + tile * 23 && x < margin + tileHalf + tile * 23 && y > margin - tileHalf + 5 * tile && y < margin + tileHalf + 5 * tile) {
 		img.style["z-index"] = 3;
 		img.style.opacity = "1";
 		img.style.animation = "appear 2s";
@@ -73,3 +115,5 @@ canvas1.addEventListener("pointerup", (e) => {
 	}
 	e.preventDefault();
 });
+
+})();
