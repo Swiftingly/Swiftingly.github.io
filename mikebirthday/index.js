@@ -107,6 +107,7 @@ canvas1.addEventListener("pointerup", (e) => {
 		img.style.opacity = "1";
 		img.style.animation = "appear 2s";
 		var audio = new Audio("birthday.mp3");
+		audio.loop = true;
 		audio.play();
 	}
 	else {
