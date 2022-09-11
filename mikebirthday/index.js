@@ -31,7 +31,8 @@ function resize(w, h) {
 	
 	ctx2.fillStyle = "#00ffff80";
 	ctx2.strokeStyle = "#00ffff80";
-	ctx2.lineWidth = 40;
+	ctx2.lineWidth = tile;
+	ctx2.lineCap = "round";
 	
 	
 }
