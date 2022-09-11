@@ -71,6 +71,8 @@ addEventListener('resize', () => {
 });
 
 canvas1.addEventListener("pointerdown", (e) => {
+	if (e.button != 0) return;
+	
 	var rect = e.target.getBoundingClientRect();
 	var x = e.clientX - rect.left;
 	var y = e.clientY - rect.top;
@@ -98,6 +100,8 @@ canvas1.addEventListener("pointermove", (e) => {
 	e.preventDefault();
 });
 canvas1.addEventListener("pointerup", (e) => {
+	if (e.button != 0) return;
+	
 	var rect = e.target.getBoundingClientRect();
 	var x = e.clientX - rect.left;
 	var y = e.clientY - rect.top;
