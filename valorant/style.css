@@ -4,8 +4,8 @@
 }
 
 html, body {
-	font-family: Tungsten-Bold;
-	font-size: x-large;
+	font-family: Tungsten-Bold, Arial;
+	font-size: 4vh;
 	background-color: #55384B;
 	color: #ECE8E1;
 	margin: 0;
@@ -21,7 +21,6 @@ div {
 }
 
 a {
-	font-size: 20pt;
 	color: #ECE8E1;
 	font-style: italic;
 	text-decoration: none;

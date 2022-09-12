@@ -2,23 +2,9 @@
 	font-family: Tungsten-Bold;
 	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
 }
-/*@keyframes back {
-	0% { background-position: 0% 0%; }
-	25% { background-position: 0% -100%; }
-	50% { background-position: -100% -100%; }
-	75% { background-position: -100% 0%; }
-	100% { background-position: 0% 0%; }
-}*/
-/*html {
-	height: 100%;
-	animation: back 10s linear infinite;
-	background-size: 200% 200%;
-	/*background-position: 0% 0%;
-	background-image: radial-gradient(circle at top left, #55384B 0, white 100%);
-}*/
 html, body {
 	font-family: Tungsten-Bold, Arial;
-	font-size: xx-large;
+	font-size: 4vh;
 	margin: auto;
 	text-align: center;
 	background-color: #55384B;
@@ -36,7 +22,7 @@ h1, p, button {
 }
 button {
 	font-family: Tungsten-Bold, Arial;
-	font-size: xx-large;
+	font-size: 4vh;
 	background-color: transparent;
 	color: #ECE8E1;
 	transition: 0.5s;
@@ -70,7 +56,7 @@ input[type="radio"]:checked+label {
 label {
 	border-bottom: 2px solid transparent;
 	margin: auto;
-	font-size: 36pt;
+	font-size: 6vh;
 	transition: 0.2s;
 }
 label {
@@ -79,7 +65,7 @@ label {
 	-ms-user-select: none;
 }
 #output-title {
-	font-size: 80pt;
+	font-size: 12vh;
 	color: #FF4558;
 	text-transform: uppercase;
 }
@@ -89,6 +75,6 @@ label {
 }
 #output {
 	display: inline-block;
-	font-size: 60pt;
+	font-size: 8vh;
 	animation: click 1s ease;
 }
