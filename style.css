@@ -1,6 +1,6 @@
 html, body {
 	font-family: Arial;
-	font-size: 2vh;
+	font-size: max(16pt, 3vh);
 	
 	color: white;
 	margin: 0;
@@ -32,10 +32,10 @@ a:link {
 		1px -1px 1px black;
 }
 a:visited {
-	color: #C0C0C0;
+	color: #E0E0E0;
 }
 a:hover {
-	transition: 0.1s;
+	transition: all ease-out 0.1s;
 	color: #808080;
 }
 
