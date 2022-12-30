@@ -1,0 +1,67 @@
+html, body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+	text-align: center;
+	font-size: 32pt;
+	font-family: Monospace;
+	font-weight: bold;
+	
+	color: white;
+	
+	background: linear-gradient(#268bd2, #134668);
+	background-attachment: fixed;
+}
+
+div {
+	margin: auto;
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+h1 {
+	margin: 0;
+	color: black;
+	text-shadow: 2px 2px 0 white;
+}
+
+p {
+	margin: 0;
+	margin-top: 40px;
+}
+
+img {
+	width: 400px;
+	border: 3px solid white;
+}
+
+.hidden {
+	display: none;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+label {
+	font-size: 48pt;
+	transition: 0.3s;
+	border-bottom: 4px solid transparent;
+}
+input[type="radio"]:checked+label {
+	border-bottom: 4px solid white;
+}
+
+#bigimg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border: 0;
+}

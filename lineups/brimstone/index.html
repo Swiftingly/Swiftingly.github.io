@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Swiftingly">
+	
+	<title>Lineups</title>
+	
+	<link rel="stylesheet" href="style.css">
+	<script src="index.js" defer></script>
+</head>
+
+<body>
+	<select name="map" id="map-select">
+		<option value=""        >Select a map</option>
+		<option value="Ascent"  >Ascent</option>
+		<option value="Bind"    >Bind</option>
+		<option value="Breeze"  >Breeze</option>
+		<option value="Fracture">Fracture</option>
+		<option value="Haven"   >Haven</option>
+		<option value="Icebox"  >Icebox</option>
+		<option value="Pearl"   >Pearl</option>
+		<option value="Split"   >Split</option>
+	</select>
+	<img id="bigimg" class="hidden">
+	<div>
+		<input type="radio" id="A-site" name="site">
+		<label for="A-site" class="hidden">A Site</label>
+		
+		<input type="radio" id="B-site" name="site">
+		<label for="B-site" class="hidden">B Site</label>
+		
+		<input type="radio" id="C-site" name="site">
+		<label for="C-site" class="hidden">C Site</label>
+	</div>
+	<div id="A-section" class="hidden"></div>
+	<div id="B-section" class="hidden"></div>
+	<div id="C-section" class="hidden"></div>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Swiftingly">
+	
+	<title>Brimstone Icebox</title>
+	
+	<link rel="stylesheet" href="style.css">
+	<script src="index.js" defer></script>
+</head>
+
+<body>
+	<h1>Icebox</h1>
+	<img id="bigimg" class="hidden">
+	<div>
+		<input type="radio" id="A-site" name="site">
+		<label for="A-site">A Site</label>
+		
+		<input type="radio" id="B-site" name="site">
+		<label for="B-site">B Site</label>
+		
+	</div>
+	<div id="A-section" class="hidden">
+		<div class="flex">
+			<div><p>Default</p><img src="ADefault.png"></div>
+			<div><p>Default from Close</p><img src="ADefault_Close.png"></div>
+			<div><p>Default from Nest</p><img src="ADefault_Nest.png"></div>
+		</div>
+		<hr>
+		<div class="flex">
+			<div><p>Open from Close</p><img src="AOpen_Close.png"></div>
+			<div><p>Open from Nest</p><img src="AOpen_Nest.png"></div>
+		</div>
+		<hr>
+		<div class="flex">
+			<div><p>Top</p><img src="ATop.png"></div>
+			<div><p>Top from Nest</p><img src="ATop_Nest.png"></div>
+		</div>
+	</div>
+	
+	<div id="B-section" class="hidden">
+		<div class="flex">
+			<div><p>Default from Cubby1</p><img src="BDefault_Cubby1.png"></div>
+			<div><p>Default from Cubby2</p><img src="BDefault_Cubby2.png"></div>
+		</div>
+		<hr>
+		<div class="flex">
+			<div><p>Corner from Close</p><img src="BCorner_Close.png"></div>
+			<div><p>Corner from Heaven</p><img src="BCorner_Heaven.png"></div>
+		</div>
+	</div>
+</body>
+
+</html>
