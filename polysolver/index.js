@@ -14,9 +14,9 @@ output.addEventListener('copy', (e) => {
 	e.preventDefault();
 });
 
-const regNum = /^\d+$/;
-const regFrac = /^(\d+)\/(\d+)$/;
-const regFloat = /^(\d+)\.(\d+)$/;
+const regNum = /^-?\d+$/;
+const regFrac = /^-?(\d+)\/(\d+)$/;
+const regFloat = /^-?(\d+)\.(\d+)$/;
 
 const table = document.getElementById('points');
 
