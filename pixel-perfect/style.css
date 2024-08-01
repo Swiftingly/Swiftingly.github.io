@@ -1,0 +1,72 @@
+html, body {
+	width: 100%;
+	font-family: Trebuchet MS;
+	margin: 0;
+}
+body * {
+	margin: 8px;
+}
+textarea {
+	font-family: Consolas, Monospace;
+	font-size: 12pt;
+	position: absolute;
+}
+label {
+	font-size: 12pt;
+}
+button {
+	margin: 12px auto;
+	padding: 4px 8px;
+	border: 2px solid black;
+	border-radius: 24px;
+	
+	font-weight: bold;
+	font-family: Trebuchet MS;
+	font-size: 20pt;
+	
+	transition: 0.15s;
+}
+#generate, #download {
+	margin: 4px auto 12px auto;
+}
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+.download-off {
+	opacity: 0.5;
+}
+
+canvas {
+    pointer-events: none;
+	border: 4px dashed;
+	image-rendering: pixelated;
+}
+
+html, body, textarea {
+	background-color: #FFF8FF;
+	color: #0A0A0F;
+}
+textarea {
+	border-left: 4px solid #404040;
+	border-top: 4px solid #404040;
+	border-right: 4px solid #909090;
+	border-bottom: 4px solid #909090;
+}
+canvas {
+	border-color: black;
+}
+@media (prefers-color-scheme: dark) {
+	html, body, textarea, input {
+		background-color: #0A0A0F;
+		color: #BEEEEE;
+	}
+	canvas {
+		border-color: white;
+	}
+	button {
+		background-color: #0A0A0F;
+		color: white;
+		border-color: white;
+	}
+}

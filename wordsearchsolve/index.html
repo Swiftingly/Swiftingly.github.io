@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Swiftingly">
+	<meta name="description" content="Word Search Solver">
+	<meta name="keywords" content="word search">
+	
+	<link rel="icon" href="./favicon.svg" type="image/svg">
+	
+	<link rel="stylesheet" href="./style.css">
+	
+	<script src="index.js" defer></script>
+	
+	<title>Word Search Solver</title>
+</head>
+<body>
+	<h1>Word Search Solver</h1>
+	
+	<label>Width</label><input id="width" type="number" value="10" min="3">
+	<label>Height</label><input id="height" type="number" value="10" min="3">
+	
+	<div>
+		<textarea id="board-input" autocomplete="off" autocorrect="off" spellcheck="false" rows="10" cols="10" wrap="hard"></textarea>
+	</div>
+	
+	<div>
+		<input type="radio" name="solve-mode" value="0" checked="true"><label>Solve from all words (slower)</label>
+		<input type="number" name="min-length" id="min-length" value="6" min="2"><label for="min-length">Minimum word length</label>
+	</div>
+	<div>
+		<input type="radio" name="solve-mode" value="1"><label>Solve using custom words</label>
+	</div>
+	
+	
+	<div>
+		<textarea id="word-input" class="hidden" rows="5" cols="20"></textarea>
+	</div>
+	
+	<div>
+		<button id="solve">Solve</button>
+	</div>
+	
+	<div>
+		<canvas id="board" class="hidden" style="z-index: 0"></canvas>
+		<canvas id="board-answers" class="hidden" style="z-index: 1"></canvas>
+	</div>
+</body>
+</html>

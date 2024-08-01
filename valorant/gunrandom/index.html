@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Swiftingly">
+	<meta name="description" content="Valorant Gun Randomizer">
+	<meta name="keywords" content="valorant,gun,gun randomizer">
+	
+	<link rel="icon" href="/valorant/favicon.png" type="image/png">
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<script src="index.js" defer></script>
+	
+	<title>Gun Randomizer</title>
+</head>
+<body>
+	<div>
+		<h1>GUN RANDOMIZER</h1>
+		
+		<div id="container">
+			<div class="category">
+				<h2>SIDEARMS</h2>
+				<div>
+					<p>CLASSIC</p>
+					<p>SHORTY</p>
+					<p>FRENZY</p>
+					<p>GHOST</p>
+					<p>SHERIFF</p>
+				</div>
+			</div>
+			
+			<div class="category">
+				<h2>SMGS</h2>
+				<div>
+					<p>STINGER</p>
+					<p>SPECTRE</p>
+				</div>
+				<h2>SHOTGUNS</h2>
+				<div>
+					<p>BUCKY</p>
+					<p>JUDGE</p>
+				</div>
+			</div>
+			
+			<div class="category">
+				<h2>RIFLES</h2>
+				<div>
+					<p>BULLDOG</p>
+					<p>GUARDIAN</p>
+					<p>PHANTOM</p>
+					<p>VANDAL</p>
+				</div>
+			</div>
+			
+			<div class="category">
+				<h2>SNIPER RIFLES</h2>
+				<div>
+					<p>MARSHAL</p>
+					<p>OUTLAW</p>
+					<p>OPERATOR</p>
+				</div>
+				<h2>MACHINE GUNS</h2>
+				<div>
+					<p>ARES</p>
+					<p>ODIN</p>
+				</div>
+			</div>
+		</div>
+		
+		<label for="credits">CREDITS: </label>
+		<input type="number" id="credits" name="credits" inputmode="numeric" max="9000" min="0" step="50" value="9000">
+		
+		<div>
+			<button id="randomize">Randomize</button>
+		</div>
+		<div>
+			<input type="checkbox" id="clickoff" name="clickoff">
+			<label for="clickoff">DISABLE ON PICK</label>
+		</div>
+		<div>
+			<p id="output"></output>
+		</div>
+	</div>
+	<div>
+		
+	</div>
+</body>
+</html>

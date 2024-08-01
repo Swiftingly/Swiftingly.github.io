@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Swiftingly">
+	<meta name="description" content="Polynomial Solver">
+	<meta name="keywords" content="pixel,paint,editor,online,free,sprite">
+	
+	<link rel="icon" href="favicon-light.png" type="image/png" media="(prefers-color-scheme: light)">
+	<link rel="icon" href="favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)">
+	<link rel="stylesheet" href="./style.css">
+	<script src="index.js" defer></script>
+	
+	<title>Poly Solver</title>
+</head>
+<body>
+	<div id="main">
+		
+		<h1>Points</h1>
+		<p>Input a set of points, using integers, decimals, or even fractions</p>
+		<p>E.g. 5, -4 | 2/3, 3.2</p>
+		<table id="points">
+			<tr>
+				<td>X</td>
+				<td>Y</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="text" id="xinput" title="X input as an integer, decimal, or fraction"></td>
+				<td><input type="text" id="yinput" title="Y input as an integer, decimal, or fraction"></td>
+				<td><button id="use">Add</button></td>
+			</tr>
+		</table>
+		<br>
+		<label>No fraction coefficients</label><input type="checkbox" id="format"><br>
+		<!--<label>Desmos Copy</label><input type="checkbox" id="desmos"><br>-->
+		<br>
+		<button id="solve">Solve</button>
+		
+		<br>
+		<h2 id="poly"></h2>
+		<button id="copy" style="display: none;">Copy Desmos Format</button>
+	</div>
+</body>
+</html>

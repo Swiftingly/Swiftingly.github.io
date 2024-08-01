@@ -1,0 +1,14 @@
+html, body {
+	overflow-x: hidden;
+	margin: 0 auto;
+	height: 100%;
+	/*background: radial-gradient(#088 0%, #044 150%);*/
+	font-family: Arial;
+	user-select: none;
+}
+canvas {
+	left: 0;
+	top: 0;
+	position: absolute;
+    pointer-events: none;
+}

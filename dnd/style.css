@@ -1,0 +1,61 @@
+html, body {
+	height: 100%;
+	font-family: Arial;
+	font-weight: bold;
+	color: gray;
+	margin: 6px;
+	padding: 6px;
+}
+
+h1 {
+	color: red;
+}
+
+div {
+	display: inline;
+}
+
+.hidden {
+	display: none;
+}
+
+.flex {
+	display: flex;
+}
+.flex div {
+	width: 100%;
+}
+
+.topbar {
+	height: 10%;
+}
+.name {
+	margin: auto;
+	height: 50%;
+}
+.name::after {
+	content: "CHARACTER NAME";
+	color: black;
+	font-weight: 400;
+	font-size: 10pt;
+	margin-left: 16px;
+}
+.topsection {
+	height: 50%;
+}
+.top {
+	height: 50%;
+	margin: 6px;
+}
+
+input[type="text"] {
+	width: 100%;
+	height: 100%;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 1vw;
+	text-align: center;
+	background-color: #F1F4FF;
+	border: 0;
+	outline: 0;
+}

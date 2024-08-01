@@ -1,0 +1,41 @@
+@font-face {
+	font-family: Tungsten-Bold;
+	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
+}
+@font-face {
+	font-family: Simpact;
+	src: local("Impact");
+	size-adjust: 85%;
+}
+
+html, body {
+	font-family: Tungsten-Bold, Simpact;
+	font-size: max(24pt, 6vh);
+	background-color: #55384B;
+	color: #ECE8E1;
+	margin: 0;
+	margin-left: 20px;
+	height: 100%;
+	letter-spacing: 1px;
+	white-space: nowrap;
+}
+h1 {
+	margin-top: 0;
+	font-weight: normal;
+	font-size: max(48pt, 12vh);
+	margin-bottom: 0;
+}
+
+div {
+	margin-left: 20px;
+}
+
+a {
+	color: #ECE8E1;
+	font-style: italic;
+	text-decoration: none;
+	transition: 0.2s;
+}
+a:hover {
+	color: #FF4558;
+}

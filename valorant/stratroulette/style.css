@@ -1,0 +1,87 @@
+@font-face {
+	font-family: Tungsten-Bold;
+	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
+}
+@font-face {
+	font-family: Simpact;
+	src: local("Impact");
+	size-adjust: 85%;
+}
+html, body {
+	font-family: Tungsten-Bold, Simpact;
+	font-size: max(16pt, 4vh);
+	margin: auto;
+	text-align: center;
+	background-color: #55384B;
+	
+	color: #ECE8E1;
+	
+	letter-spacing: 1px;
+}
+div {
+	width: 80%;
+	margin: auto;
+}
+h1, p, button {
+	font-weight: normal;
+	margin-top: 4vh;
+	margin-bottom: 0;
+}
+button {
+	font-family: Tungsten-Bold, Simpact;
+	font-size: max(16pt, 4vh);
+	background-color: transparent;
+	color: #ECE8E1;
+	transition: 0.5s;
+	
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent;
+	
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+label, button:hover {
+	cursor: pointer;
+	border-color: #ECE8E1;
+}
+#input {
+	display: flex;
+}
+#input div {
+	display: flex;
+}
+input[type="radio"] {
+	margin: auto;
+	display: none;
+}
+input[type="radio"]:checked+label {
+	color: #FF4558;
+	border-bottom: 2px solid #FF4558;
+}
+label {
+	border-bottom: 2px solid transparent;
+	margin: auto;
+	font-size: max(24pt, 6vh);
+	transition: 0.2s;
+}
+label {
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+#output-title {
+	font-size: max(48pt, 12vh);
+	color: #FF4558;
+	text-transform: uppercase;
+}
+@keyframes click {
+	0% { opacity: 0; transform: translate(0, 60px); }
+	100% { opacity: 1; }
+}
+#output {
+	display: inline-block;
+	font-size: max(32pt, 8vh);
+	animation: click 1s ease;
+}

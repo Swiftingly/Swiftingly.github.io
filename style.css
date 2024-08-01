@@ -1,0 +1,49 @@
+html, body {
+	font-family: Arial;
+	font-size: max(16pt, 3vh);
+	
+	color: white;
+	margin: 0;
+	
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+div {
+	margin-left: 20px;
+}
+
+body {
+	background: linear-gradient(135deg, #FF4E8B, #FF9741);
+}
+
+a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+	text-shadow:
+		1px 0px 1px black,
+		1px 1px 1px black,
+		0px 1px 1px black,
+		-1px 1px 1px black,
+		-1px 0px 1px black,
+		-1px -1px 1px black,
+		0px -1px 1px black,
+		1px -1px 1px black;
+}
+a:visited {
+	color: #E0E0E0;
+}
+a:hover {
+	transition: all ease-out 0.1s;
+	color: #808080;
+}
+
+#mike {
+	color: #00FFFF;
+	text-shadow: none;
+}
+#mike:hover {
+	color: #00CCCC;
+	transition: 0.1s;
+}

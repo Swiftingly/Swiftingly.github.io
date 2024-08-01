@@ -1,0 +1,43 @@
+for (var y = 0; y < Height; y++) {
+  for (var x = 0; x < Width; x++) {
+    SetXYRGB(x, y, 255, 255, 0);
+  }
+}
+$$$$
+let c1 = Color(255, 0, 0);
+let c2 = Color(255, 255, 0);
+let hsv1 = GetHSV(c1);
+let hsv2 = GetHSV(c2);
+
+for (var y = 0; y < Height; y++) {
+  for (var x = 0; x < Width; x++) {
+    let color = MixGivenHSV(hsv1, hsv2, x / Width);
+    SetXYColor(x, y, color);
+  }
+}
+$$$$
+BeginDirect();
+
+Ctx.strokeStyle = "white";
+Ctx.lineWidth = 4;
+
+Ctx.beginPath();
+Ctx.moveTo(2, 2);
+Ctx.lineTo(14, 14);
+Ctx.stroke();
+
+EndDirect();
+
+var hsv1 = GetHSV(Color(255, 0 ,0));
+var hsv2 = GetHSV(Color(255, 255, 0));
+
+GetData = DupeData(SetData);
+
+for (var y = 0; y < Height; y++) {
+  for (var x = 0; x < Width; x++) {
+    var color = GetXYColor(x, y);
+    if (color.a > 0) {
+      SetXYColor(x, y, MixGivenHSV(hsv1, hsv2, x / Width, color.a, color.a));
+    }
+  }
+}

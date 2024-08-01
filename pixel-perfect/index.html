@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Swiftingly">
+	<meta name="description" content="Create images per pixel from code">
+	
+	<link rel="icon" href="/pixel-perfect/favicon.png" type="image/png">
+	
+	<link href="style.css" rel="stylesheet" />
+	<title>Pixel Perfect</title>
+</head>
+<body>
+	<div>
+		<select name="code" id="code-select">
+			<option value="color-yellow">Single Color Yellow</option>
+			<option value="gradient-red-yellow">Gradient Red->Yellow</option>
+			<option value="favicon">Current Favicon Generator</option>
+			<option value="custom-script">Custom Script</option>
+		</select>
+	<div>
+	<textarea id="code" rows="20" cols="50" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+	
+	<div class="center">
+		<label for="width">Width:</label>
+		<input type="number" id="width" name="width" min="1" max="10000" value="100" />
+		
+		<label for="height">Height:</label>
+		<input type="number" id="height" name="height" min="1" max="10000" value="100" />
+		
+		<label for="view_scale">View Scale:</label>
+		<input type="number" id="view-scale" name="view_scale" min="0.1" max="12" step="0.1" value="1" />
+	</div>
+	
+	<div class="center">
+		<button id="generate" class="center">Generate</button>
+		<button id="download" class="center download-off">Download</button>
+	</div>
+	<div class="center"><canvas id="output-image" width="1" height="1"></canvas></div>
+	
+</body>
+<script src="index.js"></script>
+</html>
