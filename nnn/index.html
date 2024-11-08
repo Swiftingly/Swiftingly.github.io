@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+<style>
+html, body {
+	margin: 0;
+	background-color: #1C3D70;
+	font-family: Chakra Petch, sans-serif;
+}
+h1 { font-size: 36pt; }
+h2 { font-size: 20pt; }
+h3 { font-size: 16pt; font-weight: normal; }
+@keyframes resize {
+	20% {
+		letter-spacing: 2px;
+	}
+	100% {
+		letter-spacing: 6px;
+	}
+}
+#title {
+	text-align: center;
+	letter-spacing: 2px;
+	color: White;
+	animation: 2s ease-in-out infinite alternate resize;
+}
+#percent {
+	display: inline-block;
+	position: relative;
+	margin-top: 60px;
+	color: #00FFED;
+	text-shadow: 0 0 2px White;
+}
+#percent-small {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	margin: 0 24px;
+	color: #FF5BDE;
+	text-shadow: 1px 1px 2px Black;
+}
+#mini-bar {
+	width: 100%;
+	height: 8px;
+	background: linear-gradient(to right, #7F2D6F, #FF5BDE, White);
+	box-shadow: 0 2px 2px Black;
+}
+#progress-bar {
+	width: 50%;
+	height: 36px;
+	margin: 12px auto;
+	background-color: #152E54;
+	border: 4px solid Black;
+}
+#progress {
+	width: 0;
+	height: 100%;
+	background-color: #FF006E;
+}
+#date {
+	font-family: Azeret Mono, monospace;
+	text-align: right;
+	margin-right: 40%;
+	color: White;
+}
+@media (max-aspect-ratio: 1) {
+	h1 { font-size: 72pt; }
+	h2 { font-size: 40pt; }
+	h3 { font-size: 32pt; }
+	#mini-bar { height: 16px; }
+	#progress-bar { width: 80%; }
+	#date { margin-right: 10%; }
+}
+</style>
+	<link rel="icon" href="./favicon.png">
+	<title>NNN</title>
+</head>
+<body>
+	<h1 id="title">MONTH PROGRESS</h1>
+	<div style="text-align: center;">
+		<h2 id="percent"></h2>
+	</div>
+	<div id="mini-bar"></div>
+	<div id="progress-bar">
+		<div id="progress">
+		</div>
+	</div>
+	<h3 id="date"></h3>
+</body>
+<script>
+
+const ePercent = document.getElementById("percent");
+const eMinibar = document.getElementById("mini-bar");
+const eProgress = document.getElementById("progress");
+const eDate = document.getElementById("date");
+
+var current_date = new Date();
+
+current_date.setHours(0, 0, 0, 0);
+current_date.setDate(1);
+
+const start_time = current_date.valueOf();
+
+current_date.setMonth((current_date.getMonth() + 1) % 12);
+
+const time_total = current_date.valueOf() - start_time;
+const mini_bar_time = time_total / 100000;
+
+var prepare_display = true;
+
+function SetDisplay() {
+	prepare_display = false;
+	
+	var current_date = new Date();
+	
+	var time_through = current_date.valueOf() - start_time;
+	
+	var ratio = time_through / time_total;
+	var percent = ratio * 100;
+	var ratio_percent = percent.toFixed(1) + '%';
+	
+	percent *= 10;
+	var small_ratio = Math.floor((percent - Math.floor(percent)) * 100).toLocaleString('en', {minimumIntegerDigits: 2});
+	
+	ePercent.innerHTML = `${ratio_percent}<p id="percent-small">${small_ratio}%</p>`;
+	eProgress.style.width = ratio_percent;
+	
+	var next_date = new Date(start_time + (Math.floor(ratio * 1000) + 1) / 1000 * time_total);
+	
+	var day_str;
+	if (next_date.getDate > current_date.getDate()) day_str = 'tomorrow';
+	else day_str = 'today';
+	
+	var list = [];
+	list[0] = `Next 0.1% ${day_str} at ${next_date.toLocaleTimeString('en-US', {timeStyle: 'short'})}`;
+	for (var i = 0; i < 4; i++) {
+		next_date = new Date(next_date.valueOf() + time_total / 1000);
+		list.push(next_date.toLocaleTimeString('en-US', {timeStyle: 'short'}));
+	}
+	next_date = new Date(next_date.valueOf() + time_total / 1000 * 5);
+	list.push('<br>+1.0% at ' + next_date.toLocaleTimeString('en-US', {timeStyle: 'short'}));
+	eDate.innerHTML = list.join('<br>');
+}
+SetDisplay();
+
+function AnimateMiniBar() {
+	requestAnimationFrame(AnimateMiniBar);
+	
+	var ratio = ((Date.now() - start_time) % mini_bar_time) / mini_bar_time;
+	
+	var percent, height;
+	if (ratio < 0.02) {
+		percent = '100%';
+		height = (1 - ratio / 0.02) * 150 + '%';
+	}
+	else {
+		percent = ratio * 100 + '%';
+		if (ratio < 0.04) height = ((ratio - 0.02) / 0.02) * 150 + '%';
+		else height = '150%';
+	}
+	eMinibar.style['clip-path'] = `polygon(0 0, 0 ${height}, ${percent} ${height}, ${percent} 0)`;
+	
+	if (ratio < 0.5) {
+		if (prepare_display) setTimeout(SetDisplay, 10);
+	}
+	else if (!prepare_display) prepare_display = true;
+}
+requestAnimationFrame(AnimateMiniBar);
+
+document.addEventListener("visibilitychange", function() {
+	if (!document.hidden) SetDisplay();
+});
+
+</script>
+</html>
