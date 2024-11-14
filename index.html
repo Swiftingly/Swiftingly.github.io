@@ -25,5 +25,40 @@
 	
 	<div><h1><a href="./mikebirthday" id="mike">MIKE</a></h1></div>
 </body>
+<script>
+const mix_array = [
+	[[255, 78, 139], [255, 151, 65]],
+	[[255, 0, 0], [255, 141, 0]],
+	[[255, 12, 45], [0, 147, 224]],
+	[[0, 221, 203], [255, 0, 170]],
+	[[174, 0, 255], [255, 216, 0]],
+	[[255, 151, 255], [255, 28, 107]],
+];
 
+const anim_time_freq = 1 / (15 * 1000);
+
+function to_color_mix(rgb1, rgb2, amount) {
+	let r = Math.floor(rgb1[0] * (1 - amount) + rgb2[0] * amount);
+	let g = Math.floor(rgb1[1] * (1 - amount) + rgb2[1] * amount);
+	let b = Math.floor(rgb1[2] * (1 - amount) + rgb2[2] * amount);
+	return `rgb(${r}, ${g}, ${b})`;
+}
+function main(time) {
+	requestAnimationFrame(main);
+	
+	var through_time = time * anim_time_freq * mix_array.length;
+	
+	var index1 = Math.floor(through_time) % mix_array.length;
+	var index2 = (index1 + 1) % mix_array.length;
+	var amount = (through_time) % 1;
+	
+	var colors1 = mix_array[index1];
+	var colors2 = mix_array[index2];
+	
+	var color1 = to_color_mix(colors1[0], colors2[0], amount);
+	var color2 = to_color_mix(colors1[1], colors2[1], amount);
+	document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+}
+requestAnimationFrame(main);
+</script>
 </html>

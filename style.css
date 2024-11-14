@@ -10,40 +10,52 @@ html, body {
 	overflow: hidden;
 }
 
-div {
-	margin-left: 20px;
+::selection {
+	background-color: #C3FF00;
 }
 
 body {
 	background: linear-gradient(135deg, #FF4E8B, #FF9741);
 }
 
+div {
+	margin-left: 20px;
+}
+
 a:link {
-	color: #FFFFFF;
+	color: White;
 	text-decoration: none;
+	transition: linear 0.2s;
 	text-shadow:
-		1px 0px 1px black,
-		1px 1px 1px black,
-		0px 1px 1px black,
-		-1px 1px 1px black,
-		-1px 0px 1px black,
-		-1px -1px 1px black,
-		0px -1px 1px black,
-		1px -1px 1px black;
+		1.5px 0px 1.5px Black,
+		1.5px 1.5px 1.5px Black,
+		0px 1.5px 1.5px Black,
+		-1.5px 1.5px 1.5px Black,
+		-1.5px 0px 1.5px Black,
+		-1.5px -1.5px 1.5px Black,
+		0px -1.5px 1.5px Black,
+		1.5px -1.5px 1.5px Black;
 }
 a:visited {
-	color: #E0E0E0;
+	color: White;
 }
 a:hover {
-	transition: all ease-out 0.1s;
+	letter-spacing: 6px;
 	color: #808080;
+	font-style: italic;
 }
 
 #mike {
+	display: inline-block;
 	color: #00FFFF;
 	text-shadow: none;
+	transition: transform ease-in 0.2s;
+	
 }
 #mike:hover {
-	color: #00CCCC;
-	transition: 0.1s;
+	letter-spacing: 0;
+	background-color: #00FFFF;
+	color: White;
+	font-style: normal;
+	transform: translate(0, 100%) scale(1, 4);
 }
