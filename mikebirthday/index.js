@@ -9,7 +9,7 @@ const img = document.getElementById("img");
 const ctx1 = canvas1.getContext('2d');
 const ctx2 = canvas2.getContext('2d');
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const word = "25dollarvalorantgiftcard".toUpperCase();
 
 function resize(w, h) {
@@ -24,7 +24,9 @@ function resize(w, h) {
 	tile = s * 0.9 / 24;
 	tileHalf = tile * 0.5;
 	
-	ctx1.fillStyle = "black";
+	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ctx1.fillStyle = "white";
+	else ctx1.fillStyle = "black";
+	
 	ctx1.font = "bold " + (tile * 0.7) + "px Arial";
 	ctx1.textAlign = "center";
 	ctx1.textBaseline = "middle";
@@ -33,12 +35,10 @@ function resize(w, h) {
 	ctx2.strokeStyle = "#00ffff80";
 	ctx2.lineWidth = tile;
 	ctx2.lineCap = "round";
-	
-	
 }
 
-var click = false;
-var startClick = false;
+var click_down = false;
+var start_click = false;
 var startX = 0;
 var startY = 0;
 
@@ -47,13 +47,16 @@ var tile = canvas1.width * 0.9 / 24;
 var tileHalf = tile * 0.5;
 
 var grid = [];
-
+for (var y = 0; y < 24; y++) {
+	grid[y] = [];
+	for (var x = 0; x < 24; x++) {
+		grid[y][x] = letters[Math.floor(Math.random() * letters.length)];
+	}
+}
+	
 function draw() {
 	for (var y = 0; y < 24; y++) {
-		if (grid[y] == undefined) grid[y] = [];
 		for (var x = 0; x < 24; x++) {
-			if (grid[y][x] == undefined) grid[y][x] = letters[Math.floor(Math.random() * letters.length)];
-			
 			if (y != 5) ctx1.fillText(grid[y][x], margin + x * tile, margin + y * tile);
 			else {
 				ctx1.fillText(word[x], margin + x * tile, margin + y * tile);
@@ -77,9 +80,9 @@ canvas1.addEventListener("pointerdown", (e) => {
 	var x = e.clientX - rect.left;
 	var y = e.clientY - rect.top;
 	
-	click = true;
+	click_down = true;
 	if (x > margin - tileHalf && x < margin + tileHalf && y > margin - tileHalf + 5 * tile && y < margin + tileHalf + 5 * tile) {
-		startClick = true;
+		start_click = true;
 	}
 	startX = x;
 	startY = y;
@@ -91,7 +94,7 @@ canvas1.addEventListener("pointermove", (e) => {
 	var y = e.clientY - rect.top;
 	
 	ctx2.clearRect(0, 0, 1000, 1000);
-	if (click) {
+	if (click_down) {
 		ctx2.beginPath();
 		ctx2.moveTo(startX, startY);
 		ctx2.lineTo(x, y);
@@ -106,8 +109,8 @@ canvas1.addEventListener("pointerup", (e) => {
 	var x = e.clientX - rect.left;
 	var y = e.clientY - rect.top;
 	
-	click = false;
-	if (startClick && x > margin  - tileHalf + tile * 23 && x < margin + tileHalf + tile * 23 && y > margin - tileHalf + 5 * tile && y < margin + tileHalf + 5 * tile) {
+	click_down = false;
+	if (start_click && x > margin  - tileHalf + tile * 23 && x < margin + tileHalf + tile * 23 && y > margin - tileHalf + 5 * tile && y < margin + tileHalf + 5 * tile) {
 		img.style["z-index"] = 3;
 		img.style.opacity = "1";
 		img.style.animation = "appear 2s";
@@ -115,10 +118,7 @@ canvas1.addEventListener("pointerup", (e) => {
 		audio.loop = true;
 		audio.play();
 	}
-	else {
-		startClick = false;
-		
-	}
+	start_click = false;
 	e.preventDefault();
 });
 
