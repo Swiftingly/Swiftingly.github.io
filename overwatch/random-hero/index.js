@@ -11,23 +11,44 @@ var included_damage = [...DAMAGE_LIST];
 var included_support = [...SUPPORT_LIST];
 var included_all = [...TANK_LIST, ...DAMAGE_LIST, ...SUPPORT_LIST];
 
-var portraitMapping = new Map();
-
-var heroTypes = new Map();
+var portraitMap = new Map();
+var heroTypeMap = new Map();
+var heroIncludeMap = new Map();
 
 function ListRemove(list, item) {
 	let index = list.indexOf(item);
 	if (index != -1) list.splice(index, 1);
 }
 
+function GetPortraitSrc(name) {
+	return `/overwatch/assets/hero-portraits/${heroTypeMap.get(name)}/${name.replace(/[\.\:]/g, '_')}.webp`;
+}
+
+function ToggleInclusion(name) {
+	let index = included_all.indexOf(name);
+	let portrait = portraitMap.get(name);
+	let included_list = heroIncludeMap.get(name);
+	
+	if (index == -1) {
+		included_all.push(name);
+		included_list.push(name);
+		portrait.style.opacity = "100%";
+	}
+	else {
+		included_all.splice(index, 1);
+		included_list.splice(included_list.indexOf(name), 1);
+		portrait.style.opacity = "50%";
+	}
+}
+
 function CreatePortrait(name, type, included_list) {
+	heroTypeMap.set(name, type);
+	heroIncludeMap.set(name, included_list);
+	
 	var div = document.createElement('div');
 	
 	var img = document.createElement('img');
-	img.src = `/overwatch/assets/hero-portraits/${type}/${name.replace(/[\.\:]/g, '_')}.webp`;
-	
-	heroTypes.set(name, type);
-	
+	img.src = GetPortraitSrc(name);
 	
 	var h3 = document.createElement('h3');
 	h3.innerText = name;
@@ -37,20 +58,8 @@ function CreatePortrait(name, type, included_list) {
 	div.appendChild(img);
 	div.appendChild(h3);
 	
-	portraitMapping.set(name, div);
-	div.addEventListener('click', (e) => {
-		let index = included_all.indexOf(name);
-		if (index == -1) {
-			included_all.push(name);
-			included_list.push(name);
-			div.style.opacity = "100%";
-		}
-		else {
-			included_all.splice(index, 1);
-			included_list.splice(included_list.indexOf(name), 1);
-			div.style.opacity = "50%";
-		}
-	});
+	portraitMap.set(name, div);
+	div.addEventListener('click', ToggleInclusion.bind(this, name));
 	
 	return div;
 }
@@ -67,37 +76,39 @@ CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank);
 CategoryFill(damageCategory, DAMAGE_LIST, 'damage', included_damage);
 CategoryFill(supportCategory, SUPPORT_LIST, 'support', included_support);
 
-var revealZone = document.querySelector("#reveal-zone");
+const revealZone = document.querySelector("#reveal-zone");
 
-var imgElement = document.querySelector("#info img");
-var nameElement = document.querySelector("#info h2");
+const imgElement = document.querySelector("#info img");
+const nameElement = document.querySelector("#info h2");
 
 function RandomClick(included_list) {
 	if (included_list.length > 0) {
 		var name = included_list[Math.floor(Math.random() * included_list.length)];
 		
 		nameElement.innerText = name;
-		imgElement.src = `/overwatch/assets/hero-portraits/${heroTypes.get(name)}/${name.replace(/[\.\:]/g, '_')}.webp`;
+		imgElement.src = GetPortraitSrc(name);
 		
 		revealZone.classList.remove('hidden');
 	}
 }
 function NameKeep() {
 	revealZone.classList.add('hidden');
+	imgElement.src = "";
+	nameElement.innerText = "";
 }
 function NameRemove() {
 	var name = nameElement.innerText;
 	
-	var portrait = portraitMapping.get(name);
+	var portrait = portraitMap.get(name);
 	portrait.style.opacity = "50%";
 	
-	ListRemove(included_tank, name);
-	ListRemove(included_damage, name);
-	ListRemove(included_support, name);
+	ListRemove(heroIncludeMap.get(name), name);
 	ListRemove(included_all, name);
 	
 	
 	revealZone.classList.add('hidden');
+	imgElement.src = "";
+	nameElement.innerText = "";
 }
 
 document.getElementById("random-tank").addEventListener("click", RandomClick.bind(this, included_tank));

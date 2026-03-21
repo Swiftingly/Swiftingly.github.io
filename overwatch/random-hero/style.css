@@ -7,18 +7,18 @@ html, body {
 	font-family: 'Overwatch', sans-serif;
 	font-size: 24pt;
 	font-style: italic;
+	
+	color: #ECE8E1;
+	
 	margin: auto;
 	text-align: center;
 	background-color: #55384B;
-	color: #ECE8E1;
 }
 body {
     margin: 20px;
 }
 div {
 	width: 100%;
-	margin-top: 20px;
-	margin-bottom: 20px;
 }
 p, h1, h2, h3 {
 	margin-top: 0;
@@ -34,21 +34,16 @@ p, h1, h2, h3 {
 	background-color: #47FFBF3A;
 	border: 1px solid #47FFBF;
 }
-#container p {
-	background-color: #FFFFFF19;
-	margin-top: 8px;
-	margin-bottom: 8px;
-	/*border: 1px solid #FFFFFF;*/
-}
 .category {
 	display: flex;
 	flex-direction: row;
 	flex-flow: column;
 	height: 100%;
-	margin: 0;
+	margin: 4px;
 }
-.category p, h2 {
+.category h2 {
 	user-select: none;
+	margin-bottom: 10px;
 }
 .hero-list {
 	display: flex;
@@ -62,40 +57,33 @@ p, h1, h2, h3 {
 	padding: 4px;
 	border-radius: 4px;
 	cursor: pointer;
-}
-.hero-container * {
 	user-select: none;
 }
 .hero-container h3 {
 	color: Black;
 	font-size: 20pt;
 	font-weight: normal;
+	padding: 2px;
 }
 .hero-container img {
 	width: 60px;
 	background-color: #C8DDF8;
 }
 
-@keyframes click {
-	0% { color: black; }
-	100% { color: #ECE8E1; }
-}
-#output {
-	animation: click 0.5s linear;
-	font-size: 64pt;
-}
 button {
 	font-family: 'Overwatch', sans-serif;
+	font-size: 28pt;
+	font-style: italic;
 	color: Black;
+	
+	margin: 0 auto;
+	
 	width: 260px;
 	height: 60px;
 	background-color: White;
 	border: 0;
 	border-radius: 4px;
-	outline-offset: 8px;
-	font-weight: normal;
-	font-size: 28pt;
-	font-style: italic;
+	
 	transition: 0.2s;
 	box-shadow: 2px 0px 0px black;
 }
@@ -109,7 +97,7 @@ button:hover {
 #reveal-zone {
 	position: fixed;
 	margin: 0;
-	top: 0; bottom: 0; left: 0; right: 0;
+	inset: 0;
 	background-color: #0000007F;
 	backdrop-filter: blur(4px);
 	display: flex;
@@ -120,27 +108,34 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	transition: 0.5s;
+	transition: 0.45s;
 }
-#reveal-zone div img {
-	display: block;
+#reveal-zone img {
+	border: 3px solid White;
+	border-radius: 3px;
 }
-#reveal-zone div h2 {
+#reveal-zone h2 {
 	text-align: center;
 
 }
+#keep, #remove {
+	cursor: pointer;
+	user-select: none;
+}
+#keep:hover {
+	background-color: #3AE83F67;
+	
+}
+#remove:hover {
+	background-color: #E80D0D67;
+}
+
 hr {
 	background-color: white;
 	height: 1px;
 	width: 100%;
 }
+
 .hidden {
 	display: none !important;
-}
-
-#keep:hover {
-	background-color: #00FF003F;
-}
-#remove:hover {
-	background-color: #FF00003F;
 }
