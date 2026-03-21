@@ -99,10 +99,10 @@ function RandomClick(included_list) {
 function NameKeep() {
 	revealZone.classList.add('hidden');
 	imgElement.src = "";
-	nameElement.innerText = "";
+	nameElement.innerHTML = "";
 }
 function NameRemove() {
-	var name = nameElement.innerText;
+	var name = nameElement.innerHTML;
 	
 	var portrait = portraitMap.get(name);
 	portrait.style.opacity = "50%";
@@ -113,7 +113,7 @@ function NameRemove() {
 	
 	revealZone.classList.add('hidden');
 	imgElement.src = "";
-	nameElement.innerText = "";
+	nameElement.innerHTML = "";
 }
 
 document.getElementById("random-initiator").addEventListener("click", RandomClick.bind(this, included_initiator));
