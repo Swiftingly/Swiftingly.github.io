@@ -27,6 +27,8 @@ div {
 p, h1, h2, h3 {
 	margin-top: 0;
 	margin-bottom: 0;
+	font-weight: normal;
+	text-transform: uppercase;
 }
 
 #container {
@@ -67,7 +69,6 @@ p, h1, h2, h3 {
 .agent-container h3 {
 	color: Black;
 	font-size: 20pt;
-	font-weight: normal;
 	padding: 2px;
 }
 .agent-container img {
