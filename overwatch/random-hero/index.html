@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Swiftingly">
+	<meta name="description" content="Overwatch Hero Randomizer">
+	<meta name="keywords" content="overwatch,hero,hero randomizer">
+	
+	<link rel="icon" href="/overwatch/assets/favicon.webp" type="image/webp">
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<script src="index.js" defer></script>
+	
+	<title>Hero Randomizer</title>
+</head>
+<body>
+	<div>
+		<h1>HERO RANDOMIZER</h1>
+		
+		<div id="container">
+			<div class="category" id="tank">
+				<h2>TANK</h2>
+				<div class="hero-list"></div>
+				<hr>
+				<button id="random-tank">Random Tank</button>
+			</div>
+			
+			<div class="category" id="damage">
+				<h2>DAMAGE</h2>
+				<div class="hero-list"></div>
+				<hr>
+				<button id="random-damage">Random Damage</button>
+			</div>
+			
+			<div class="category" id="support">
+				<h2>SUPPORT</h2>
+				<div class="hero-list"></div>
+				<hr>
+				<button id="random-support">Random Support</button>
+			</div>
+		</div>
+		
+		<hr>
+		<div>
+			<button id="random-all-roles">Random All-Roles</button>
+		</div>
+		<div>
+			<p id="output"></output>
+		</div>
+	</div>
+	<div id="reveal-zone" class="hidden"><div id="keep"><h2>KEEP</h2></div><div id="info"><img id="reveal-image" /><h2>NAME</h2></div><div id="remove"><h2>REMOVE</h2></div></div>
+</body>
+</html>
