@@ -59,7 +59,7 @@ p, h1, h2, h3 {
 .agent-container {
 	margin: 2px;
 	width: fit-content;
-	background-color: white;
+	background-color: #ECE8E1;
 	padding: 4px;
 	border-radius: 4px;
 	cursor: pointer;
@@ -67,27 +67,27 @@ p, h1, h2, h3 {
 	touch-action: manipulation;
 }
 .agent-container h3 {
-	color: Black;
+	color: #0f1923;
 	font-size: 20pt;
 	padding: 2px;
 }
 .agent-container img {
 	width: 60px;
-	background-color: #C8DDF8;
+	background: linear-gradient(#1A222D, #2F3942);
 }
 
 button {
 	font-family: Tungsten-Bold, Simpact;
 	font-size: 28pt;
-	color: Black;
+	color: #0f1923;
 	
 	margin: 0 auto;
 	
 	width: 260px;
 	height: 60px;
-	background-color: White;
+	background-color: #ECE8E1;
 	border: 0;
-	border-radius: 4px;
+	border-radius: 1px;
 	
 	transition: 0.2s;
 	box-shadow: 2px 0px 0px black;
@@ -95,7 +95,7 @@ button {
 button:hover {
 	letter-spacing: 2px;
 	cursor: pointer;
-	color: #333;
+	color: #0f1923;
 	box-shadow: 0px 0px 12px black;
 }
 
