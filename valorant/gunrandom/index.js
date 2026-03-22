@@ -5,6 +5,7 @@ const PRICE_LIST = {
 	SHORTY  : 300,
 	FRENZY  : 450,
 	GHOST   : 500,
+	BANDIT  : 600,
 	SHERIFF : 800,
 	
 	STINGER : 1100,
@@ -26,7 +27,7 @@ const PRICE_LIST = {
 	ODIN    : 3200
 };
 const GUN_LIST = {
-	SIDEARMS       : ['CLASSIC', 'SHORTY', 'FRENZY', 'GHOST', 'SHERIFF'],
+	SIDEARMS       : ['CLASSIC', 'SHORTY', 'FRENZY', 'GHOST', 'BANDIT', 'SHERIFF'],
 	SMGS           : ['STINGER', 'SPECTRE',],
 	SHOTGUNS       : ['BUCKY', 'JUDGE'],
 	RIFLES         : ['BULLDOG', 'GUARDIAN', 'PHANTOM', 'VANDAL'],
