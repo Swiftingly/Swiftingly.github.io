@@ -138,11 +138,11 @@ button:hover {
 	user-select: none;
 }
 #keep:hover {
-	background-color: #3AE83F67;
+	background-color: #47FFBF67;
 	
 }
 #remove:hover {
-	background-color: #E80D0D67;
+	background-color: #FF465567;
 }
 
 hr {
