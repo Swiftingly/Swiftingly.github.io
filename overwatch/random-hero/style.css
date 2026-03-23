@@ -17,7 +17,7 @@ html, body {
 	font-size: 24pt;
 	font-style: italic;
 	
-	color: #ECE8E1;
+	color: White;
 	
 	margin: auto;
 	text-align: center;
@@ -75,6 +75,14 @@ h1 {
 	user-select: none;
 	touch-action: manipulation;
 	box-shadow: 0px 0px 4px black;
+	transition: transform 0.1s;
+}
+.hero-container:hover {
+	transform: scale(1.1, 1.1);
+	z-index: 1;
+}
+.hero-container:focus-visible {
+	outline: 2px solid #ED6516;
 }
 .hero-container h3 {
 	color: Black;
@@ -85,6 +93,9 @@ h1 {
 .hero-container img {
 	width: 60px;
 	background-color: #C8DDF8;
+}
+.hero-container-off {
+	opacity: 50%;
 }
 
 button {
@@ -109,6 +120,8 @@ button:hover {
 	cursor: pointer;
 	color: #333;
 	box-shadow: 0px 0px 12px black;
+	transform: scale(1.1, 1.1);
+	z-index: 1;
 }
 
 #reveal-zone {
@@ -118,6 +131,7 @@ button:hover {
 	background-color: #0000007F;
 	backdrop-filter: blur(4px);
 	display: flex;
+	z-index: 2;
 }
 #reveal-zone div {
 	height: 100%;

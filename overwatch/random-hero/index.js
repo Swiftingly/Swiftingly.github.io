@@ -32,12 +32,12 @@ function ToggleInclusion(name) {
 	if (index == -1) {
 		included_all.push(name);
 		included_list.push(name);
-		portrait.style.opacity = "100%";
+		portrait.classList.remove("hero-container-off");
 	}
 	else {
 		included_all.splice(index, 1);
 		included_list.splice(included_list.indexOf(name), 1);
-		portrait.style.opacity = "50%";
+		portrait.classList.add("hero-container-off");
 	}
 }
 
@@ -54,6 +54,9 @@ function CreatePortrait(name, type, included_list) {
 	h3.innerText = name;
 	
 	div.classList.add('hero-container');
+	
+	div.setAttribute('role', 'button');
+	div.setAttribute('tabindex', '0');
 	
 	div.appendChild(img);
 	div.appendChild(h3);
@@ -100,7 +103,7 @@ function NameRemove() {
 	var name = nameElement.innerText;
 	
 	var portrait = portraitMap.get(name);
-	portrait.style.opacity = "50%";
+	portrait.classList.add("hero-container-off");
 	
 	ListRemove(heroIncludeMap.get(name), name);
 	ListRemove(included_all, name);
