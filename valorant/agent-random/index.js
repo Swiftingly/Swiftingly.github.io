@@ -62,6 +62,19 @@ function CreatePortrait(name, type, included_list) {
 	div.setAttribute('role', 'button');
 	div.setAttribute('tabindex', '0');
 	
+	div.addEventListener("keydown", function(event) {
+		if (event.key === "Enter") {
+			event.preventDefault();
+			this.click();
+		}
+	});
+	div.addEventListener("keyup", function(event) {
+		if (event.key === " ") {
+			event.preventDefault();
+			this.click();
+		}
+	});
+	
 	div.appendChild(img);
 	div.appendChild(h3);
 	
