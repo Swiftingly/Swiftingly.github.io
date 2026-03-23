@@ -1,0 +1,44 @@
+@font-face {
+	font-family: 'Overwatch';
+	src: url('/overwatch/assets/bignoodletoo.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Bank-Sans';
+	src: url('/overwatch/assets/BankSans.otf') format('opentype');
+}
+
+body {
+	background: linear-gradient(#1D4068 0%, #525F6D 45%, #525F6D 55%, #112F51 100%);
+	background-repeat: no-repeat;
+	background-color: #112F51;
+}
+html, body {
+	font-family: 'Overwatch', sans-serif;
+	font-size: 24pt;
+	font-style: italic;
+	
+	color: White;
+	
+	height: 100%;
+	margin: 0;
+}
+
+h1, a {
+	margin: 8px;
+}
+h1 {
+	font-family: Bank-Sans, serif;
+	font-style: normal;
+	font-size: 48pt;
+	margin-bottom: 12px;
+	text-transform: uppercase;
+}
+a {
+	text-decoration: none;
+	color: #ED6516;
+	font-size: 36pt;
+	transition: 0.3s;
+}
+a:hover {
+	letter-spacing: 4px;
+}
