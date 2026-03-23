@@ -3,6 +3,10 @@
 	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
 }
 @font-face {
+	font-family: Valorant;
+	src: url("/valorant/Valorant.ttf") format("truetype");
+}
+@font-face {
 	font-family: Simpact;
 	src: local("Impact");
 	size-adjust: 85%;
@@ -16,7 +20,7 @@ html, body {
 	
 	margin: auto;
 	text-align: center;
-	background-color: #0F1923;
+	background-color: #101A24;
 }
 body {
     margin: 20px;
@@ -28,7 +32,9 @@ p, h1, h2, h3 {
 	margin-top: 0;
 	margin-bottom: 0;
 	font-weight: normal;
-	text-transform: uppercase;
+}
+h1 {
+	font-family: Valorant;
 }
 
 #container {
@@ -37,8 +43,9 @@ p, h1, h2, h3 {
 	max-width: 1400px;
 }
 #container h2 {
-	background-color: #47FFBF3A;
-	border: 1px solid #47FFBF;
+	background-color: #FF4655BB;
+	border: 2px solid #FF4655;
+	border-radius: 2px;
 }
 .category {
 	display: flex;
@@ -59,17 +66,20 @@ p, h1, h2, h3 {
 .agent-container {
 	margin: 2px;
 	width: fit-content;
-	background-color: #ECE8E1;
+	/*background-color: #47FFBF3A;*/
+	background: linear-gradient(transparent, #47FFBF3A);
 	padding: 4px;
+	border: 1px solid #47FFBF;
 	border-radius: 4px;
 	cursor: pointer;
 	user-select: none;
 	touch-action: manipulation;
 }
 .agent-container h3 {
-	color: #0f1923;
+	color: #ECE8E1;
 	font-size: 20pt;
 	padding: 2px;
+	text-transform: uppercase;
 }
 .agent-container img {
 	width: 60px;
@@ -79,14 +89,15 @@ p, h1, h2, h3 {
 button {
 	font-family: Tungsten-Bold, Simpact;
 	font-size: 28pt;
-	color: #0f1923;
+	color: #ECE8E1;
 	
 	margin: 0 auto;
 	
 	width: 260px;
 	height: 60px;
-	background-color: #ECE8E1;
-	border: 0;
+	/*background-color: transparent;*/
+	background: linear-gradient(#47FFBF1A, #47FFBF4A);
+	border: 2px solid #47FFBF;
 	border-radius: 4px;
 	
 	transition: 0.2s;
@@ -95,7 +106,6 @@ button {
 button:hover {
 	letter-spacing: 2px;
 	cursor: pointer;
-	color: #0f1923;
 	box-shadow: 0px 0px 12px black;
 }
 
