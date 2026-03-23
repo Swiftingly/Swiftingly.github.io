@@ -67,16 +67,21 @@ h1 {
 	margin: 2px;
 	width: fit-content;
 	/*background-color: #47FFBF3A;*/
-	background: linear-gradient(transparent, #47FFBF3A);
+	background: linear-gradient(#101A24, #1d4f48);
 	padding: 4px;
 	border: 1px solid #47FFBF;
 	border-radius: 4px;
 	cursor: pointer;
 	user-select: none;
 	touch-action: manipulation;
+	transition: transform 0.1s;
 }
 .agent-container:hover {
 	border: 1px solid White;
+}
+.agent-container:hover:not(.agent-container-off) {
+	transform: scale(1.2, 1.2);
+	z-index: 1;
 }
 .agent-container h3 {
 	color: #ECE8E1;
@@ -89,7 +94,7 @@ h1 {
 	background: linear-gradient(#1A222D, #2F3942);
 }
 .agent-container-off {
-	background: linear-gradient(transparent, #FF46553A);
+	background: linear-gradient(#1A222D, #47242f);
 	border: 1px solid #FF4655;
 	opacity: 50%;
 }
