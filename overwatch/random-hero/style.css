@@ -97,6 +97,16 @@ h1 {
 .hero-container-off {
 	opacity: 50%;
 }
+.random-hover {
+	outline: 6px solid #ED6516;
+	z-index: 1;
+}
+.hover-add.hero-container-off {
+	opacity: 75%;
+}
+.hover-remove:not(.hero-container-off) {
+	opacity: 75%;
+}
 
 button {
 	font-family: 'Overwatch', sans-serif;

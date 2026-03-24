@@ -77,7 +77,7 @@ h1 {
 	transition: transform 0.1s;
 }
 .agent-container:hover {
-	border: 1px solid White;
+	border: 1px solid #ECE8E1;
 }
 .agent-container:hover:not(.agent-container-off) {
 	transform: scale(1.2, 1.2);
@@ -97,6 +97,15 @@ h1 {
 	background: linear-gradient(#1A222D, #47242f);
 	border: 1px solid #FF4655;
 	opacity: 50%;
+}
+.random-hover {
+	border: 1px solid #FF0000;
+}
+.hover-add.agent-container-off {
+	opacity: 75%;
+}
+.hover-remove:not(.agent-container-off) {
+	opacity: 75%;
 }
 
 button {

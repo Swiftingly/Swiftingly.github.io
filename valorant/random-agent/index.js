@@ -127,6 +127,36 @@ function RandomClick(included_list) {
 		revealZone.classList.remove('hidden');
 	}
 }
+
+var last_interval = 0;
+var last_name = "";
+function RandomHoverStart(included_list) {
+	if (included_list.length > 0) {
+		last_interval = setInterval(function() {
+			/*console.log(included_list[0]);*/
+			if (last_name.length > 0) {
+				var last_portrait = portraitMap.get(last_name);
+				last_portrait.classList.remove("random-hover");
+			}
+			last_name = included_list[Math.floor(Math.random() * included_list.length)];
+			var portrait = portraitMap.get(last_name);
+			portrait.classList.add("random-hover");
+			//console.log(portrait);
+			
+		}, 100);
+	}
+	else last_interval = 0;
+}
+
+function RandomHoverEnd(included_list) {
+	clearInterval(last_interval);
+	if (last_name.length > 0) {
+		var last_portrait = portraitMap.get(last_name);
+		last_portrait.classList.remove("random-hover");
+	}
+	last_interval = 0;
+}
+
 function NameKeep() {
 	revealZone.classList.add('hidden');
 	imgElement.src = "";
@@ -149,6 +179,18 @@ document.getElementById("random-sentinel").addEventListener("click", RandomClick
 document.getElementById("random-controller").addEventListener("click", RandomClick.bind(this, included_controller));
 document.getElementById("random-all-roles").addEventListener("click", RandomClick.bind(this, included_all));
 
+document.getElementById("random-initiator").addEventListener("mouseenter", RandomHoverStart.bind(this, included_initiator));
+document.getElementById("random-duelist").addEventListener("mouseenter", RandomHoverStart.bind(this, included_duelist));
+document.getElementById("random-sentinel").addEventListener("mouseenter", RandomHoverStart.bind(this, included_sentinel));
+document.getElementById("random-controller").addEventListener("mouseenter", RandomHoverStart.bind(this, included_controller));
+document.getElementById("random-all-roles").addEventListener("mouseenter", RandomHoverStart.bind(this, included_all));
+
+document.getElementById("random-initiator").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_initiator));
+document.getElementById("random-duelist").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_duelist));
+document.getElementById("random-sentinel").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_sentinel));
+document.getElementById("random-controller").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_controller));
+document.getElementById("random-all-roles").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_all));
+
 document.getElementById("keep").addEventListener("click", NameKeep);
 document.getElementById("remove").addEventListener("click", NameRemove);
 
@@ -160,5 +202,26 @@ document.getElementById("add-all").addEventListener("click", function() {
 document.getElementById("remove-all").addEventListener("click", function() {
 	while (included_all.length > 0) {
 		ToggleInclusion(included_all[included_all.length - 1]);
+	}
+});
+
+document.getElementById("add-all").addEventListener("mouseenter", function() {
+	for (portrait of portraitMap.values()) {
+		portrait.classList.add("hover-add");
+	}
+});
+document.getElementById("add-all").addEventListener("mouseleave", function() {
+	for (portrait of portraitMap.values()) {
+		portrait.classList.remove("hover-add");
+	}
+});
+document.getElementById("remove-all").addEventListener("mouseenter", function() {
+	for (portrait of portraitMap.values()) {
+		portrait.classList.add("hover-remove");
+	}
+});
+document.getElementById("remove-all").addEventListener("mouseleave", function() {
+	for (portrait of portraitMap.values()) {
+		portrait.classList.remove("hover-remove");
 	}
 });
