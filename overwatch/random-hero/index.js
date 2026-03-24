@@ -2,6 +2,7 @@ const TANK_LIST = [ "Mauga", "Orisa", "Roadhog", "Zarya", "D.Va", "Doomfist", "H
 const DAMAGE_LIST = [ "Anran", "Genji", "Reaper", "Tracer", "Vendetta", "Venture", "Echo", "Freja", "Pharah", "Sombra", "Ashe", "Cassidy", "Hanzo", "Sojourn", "Widowmaker", "Bastion", "Emre", "Junkrat", "Mei", "Soldier: 76", "Symmetra", "Torbjörn" ].sort();
 const SUPPORT_LIST = [ "Kiriko", "Lifeweaver", "Mercy", "Moira", "Brigitte", "Illari", "Juno", "Mizuki", "Wuyang", "Ana", "Baptiste", "Jetpack Cat", "Lúcio", "Zenyatta" ].sort();
 
+
 var tankCategory = document.getElementById("tank");
 var damageCategory = document.getElementById("damage");
 var supportCategory = document.getElementById("support");
@@ -10,6 +11,8 @@ var included_tank = [...TANK_LIST];
 var included_damage = [...DAMAGE_LIST];
 var included_support = [...SUPPORT_LIST];
 var included_all = [...TANK_LIST, ...DAMAGE_LIST, ...SUPPORT_LIST];
+
+var unincluded_all = [];
 
 var portraitMap = new Map();
 var heroTypeMap = new Map();
@@ -24,7 +27,7 @@ function GetPortraitSrc(name) {
 	return `/overwatch/assets/hero-portraits/${heroTypeMap.get(name)}/${name.replace(/[\.\:]/g, '_')}.webp`;
 }
 
-function ToggleInclusion(name) {
+function ToggleInclusion(name, save = true) {
 	let index = included_all.indexOf(name);
 	let portrait = portraitMap.get(name);
 	let included_list = heroIncludeMap.get(name);
@@ -32,12 +35,18 @@ function ToggleInclusion(name) {
 	if (index == -1) {
 		included_all.push(name);
 		included_list.push(name);
+		ListRemove(unincluded_all, name);
 		portrait.classList.remove("hero-container-off");
 	}
 	else {
 		included_all.splice(index, 1);
 		included_list.splice(included_list.indexOf(name), 1);
+		unincluded_all.push(name);
 		portrait.classList.add("hero-container-off");
+	}
+	
+	if (save) {
+		localStorage.setItem("save", unincluded_all.join(','));
 	}
 }
 
@@ -92,6 +101,13 @@ CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank);
 CategoryFill(damageCategory, DAMAGE_LIST, 'damage', included_damage);
 CategoryFill(supportCategory, SUPPORT_LIST, 'support', included_support);
 
+var save = localStorage.getItem("save");
+if (save != null && save.length > 0) {
+	for (name of save.split(',')) {
+		ToggleInclusion(name, false);
+	}
+}
+
 const revealZone = document.querySelector("#reveal-zone");
 
 const imgElement = document.querySelector("#info img");
@@ -115,11 +131,7 @@ function NameKeep() {
 function NameRemove() {
 	var name = nameElement.innerText;
 	
-	var portrait = portraitMap.get(name);
-	portrait.classList.add("hero-container-off");
-	
-	ListRemove(heroIncludeMap.get(name), name);
-	ListRemove(included_all, name);
+	ToggleInclusion(name);
 	
 	
 	revealZone.classList.add('hidden');
@@ -134,3 +146,14 @@ document.getElementById("random-all-roles").addEventListener("click", RandomClic
 
 document.getElementById("keep").addEventListener("click", NameKeep);
 document.getElementById("remove").addEventListener("click", NameRemove);
+
+document.getElementById("add-all").addEventListener("click", function() {
+	while (unincluded_all.length > 0) {
+		ToggleInclusion(unincluded_all[unincluded_all.length - 1]);
+	}
+});
+document.getElementById("remove-all").addEventListener("click", function() {
+	while (included_all.length > 0) {
+		ToggleInclusion(included_all[included_all.length - 1]);
+	}
+});

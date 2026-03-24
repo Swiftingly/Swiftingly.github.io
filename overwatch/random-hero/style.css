@@ -123,6 +123,31 @@ button:hover {
 	transform: scale(1.1, 1.1);
 	z-index: 1;
 }
+#add-all, #random-all-roles, #remove-all {
+	margin: 0 20px;
+}
+.small-button {
+	width: 240px;
+	height: 50px;
+	font-size: 24pt;
+}
+.small-button:hover {
+	transform: scale(1.2, 1.2);
+}
+#add-all {
+	border: 3px solid #3AE83F;
+}
+#remove-all {
+	border: 3px solid #E80D0D;
+}
+#add-all:hover {
+	background-color: #3AE83F;
+	color: white;
+}
+#remove-all:hover {
+	background-color: #E80D0D;
+	color: white;
+}
 
 #reveal-zone {
 	position: fixed;

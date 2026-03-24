@@ -108,9 +108,9 @@ button {
 	
 	width: 260px;
 	height: 60px;
-	/*background-color: transparent;*/
-	background: linear-gradient(#47FFBF1A, #47FFBF4A);
-	border: 2px solid #47FFBF;
+	background-color: transparent;
+	background: linear-gradient(#101A24, #1d4f48);
+	border: 2px solid #ECE8E1;
 	border-radius: 4px;
 	
 	transition: 0.2s;
@@ -120,7 +120,33 @@ button:hover {
 	letter-spacing: 2px;
 	cursor: pointer;
 	box-shadow: 0px 0px 12px black;
-	border: 2px solid White;
+	transform: scale(1.1, 1.1);
+	z-index: 1;
+}
+#add-all, #random-all-roles, #remove-all {
+	margin: 0 20px;
+}
+.small-button {
+	width: 240px;
+	height: 50px;
+	font-size: 24pt;
+}
+.small-button:hover {
+	transform: scale(1.2, 1.2);
+}
+#add-all {
+	border: 3px solid #47FFBF;
+}
+#remove-all {
+	border: 3px solid #FF4655;
+}
+#add-all:hover {
+	background: 0;
+	background-color: #47FFBF;
+}
+#remove-all:hover {
+	background: 0;
+	background-color: #FF4655;
 }
 
 #reveal-zone {
@@ -130,6 +156,7 @@ button:hover {
 	background-color: #0000007F;
 	backdrop-filter: blur(4px);
 	display: flex;
+	z-index: 2;
 }
 #reveal-zone div {
 	height: 100%;

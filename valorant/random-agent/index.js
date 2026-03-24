@@ -15,6 +15,8 @@ var included_sentinel = [...SENTINEL_LIST];
 var included_controller = [...CONTROLLER_LIST];
 var included_all = [...INITIATOR_LIST, ...DUELIST_LIST, ...SENTINEL_LIST, ...CONTROLLER_LIST];
 
+var unincluded_all = [];
+
 var portraitMap = new Map();
 var agentTypeMap = new Map();
 var agentIncludeMap = new Map();
@@ -28,7 +30,7 @@ function GetPortraitSrc(name) {
 	return `/valorant/assets/agent-portraits/${agentTypeMap.get(name)}/${name.replace(/[\.\:\/]/g, '_')}.webp`;
 }
 
-function ToggleInclusion(name) {
+function ToggleInclusion(name, save = true) {
 	let index = included_all.indexOf(name);
 	let portrait = portraitMap.get(name);
 	let included_list = agentIncludeMap.get(name);
@@ -36,12 +38,18 @@ function ToggleInclusion(name) {
 	if (index == -1) {
 		included_all.push(name);
 		included_list.push(name);
+		ListRemove(unincluded_all, name);
 		portrait.classList.remove("agent-container-off");
 	}
 	else {
 		included_all.splice(index, 1);
 		included_list.splice(included_list.indexOf(name), 1);
+		unincluded_all.push(name);
 		portrait.classList.add("agent-container-off");
+	}
+	
+	if (save) {
+		localStorage.setItem("save", unincluded_all.join(','));
 	}
 }
 
@@ -97,6 +105,13 @@ CategoryFill(duelistCategory, DUELIST_LIST, 'duelist', included_duelist);
 CategoryFill(sentinelCategory, SENTINEL_LIST, 'sentinel', included_sentinel);
 CategoryFill(controllerCategory, CONTROLLER_LIST, 'controller', included_controller);
 
+var save = localStorage.getItem("save");
+if (save != null && save.length > 0) {
+	for (name of save.split(',')) {
+		ToggleInclusion(name, false);
+	}
+}
+
 const revealZone = document.querySelector("#reveal-zone");
 
 const imgElement = document.querySelector("#info img");
@@ -120,11 +135,7 @@ function NameKeep() {
 function NameRemove() {
 	var name = nameElement.innerHTML;
 	
-	var portrait = portraitMap.get(name);
-	portrait.classList.add("agent-container-off");
-	
-	ListRemove(agentIncludeMap.get(name), name);
-	ListRemove(included_all, name);
+	ToggleInclusion(name);
 	
 	
 	revealZone.classList.add('hidden');
@@ -140,3 +151,14 @@ document.getElementById("random-all-roles").addEventListener("click", RandomClic
 
 document.getElementById("keep").addEventListener("click", NameKeep);
 document.getElementById("remove").addEventListener("click", NameRemove);
+
+document.getElementById("add-all").addEventListener("click", function() {
+	while (unincluded_all.length > 0) {
+		ToggleInclusion(unincluded_all[unincluded_all.length - 1]);
+	}
+});
+document.getElementById("remove-all").addEventListener("click", function() {
+	while (included_all.length > 0) {
+		ToggleInclusion(included_all[included_all.length - 1]);
+	}
+});
