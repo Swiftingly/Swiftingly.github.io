@@ -49,7 +49,7 @@ function ToggleInclusion(name, save = true) {
 	}
 	
 	if (save) {
-		localStorage.setItem("save", unincluded_all.join(','));
+		localStorage.setItem("valorant-random-agent-save", unincluded_all.join(','));
 	}
 }
 
@@ -105,7 +105,7 @@ CategoryFill(duelistCategory, DUELIST_LIST, 'duelist', included_duelist);
 CategoryFill(sentinelCategory, SENTINEL_LIST, 'sentinel', included_sentinel);
 CategoryFill(controllerCategory, CONTROLLER_LIST, 'controller', included_controller);
 
-var save = localStorage.getItem("save");
+var save = localStorage.getItem("valorant-random-agent-save");
 if (save != null && save.length > 0) {
 	for (name of save.split(',')) {
 		ToggleInclusion(name, false);

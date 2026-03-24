@@ -46,7 +46,7 @@ function ToggleInclusion(name, save = true) {
 	}
 	
 	if (save) {
-		localStorage.setItem("save", unincluded_all.join(','));
+		localStorage.setItem("overwatch-random-hero-save", unincluded_all.join(','));
 	}
 }
 
@@ -107,7 +107,7 @@ CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank);
 CategoryFill(damageCategory, DAMAGE_LIST, 'damage', included_damage);
 CategoryFill(supportCategory, SUPPORT_LIST, 'support', included_support);
 
-var save = localStorage.getItem("save");
+var save = localStorage.getItem("overwatch-random-hero-save");
 if (save != null && save.length > 0) {
 	for (name of save.split(',')) {
 		ToggleInclusion(name, false);
