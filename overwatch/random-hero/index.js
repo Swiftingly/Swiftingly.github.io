@@ -84,7 +84,13 @@ function CreatePortrait(name, type, included_list) {
 	div.appendChild(h3);
 	
 	portraitMap.set(name, div);
-	div.addEventListener('click', ToggleInclusion.bind(this, name));
+	div.addEventListener('click', function() {
+		div.classList.add("no-hover");
+		ToggleInclusion(name);
+	});
+	div.addEventListener('mouseleave', function() {
+		div.classList.remove("no-hover");
+	});
 	
 	return div;
 }
