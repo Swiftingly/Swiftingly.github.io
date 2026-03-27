@@ -25,9 +25,6 @@ html, body {
 body {
     margin: 20px;
 }
-div {
-	width: 100%;
-}
 p, h1, h2, h3 {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -56,7 +53,7 @@ h1 {
 }
 .category h2 {
 	user-select: none;
-	margin-bottom: 10px;
+	margin-bottom: 6px;
 }
 .agent-list {
 	display: flex;
@@ -66,7 +63,6 @@ h1 {
 .agent-container {
 	margin: 2px;
 	width: fit-content;
-	/*background-color: #47FFBF3A;*/
 	background: linear-gradient(#101A24, #1d4f48);
 	padding: 4px;
 	border: 1px solid #47FFBF;
@@ -102,9 +98,13 @@ h1 {
 	border: 1px solid #FF0000;
 }
 .hover-add.agent-container-off {
+	background: linear-gradient(#101A24, #1d4f48);
+	border: 1px solid #47FFBF;
 	opacity: 75%;
 }
 .hover-remove:not(.agent-container-off) {
+	background: linear-gradient(#1A222D, #47242f);
+	border: 1px solid #FF4655;
 	opacity: 75%;
 }
 
@@ -204,4 +204,42 @@ hr {
 
 .hidden {
 	display: none !important;
+}
+
+.category-toggle {
+	position: relative;
+	width: 45px;
+	height: 23px;
+	cursor: pointer;
+	margin: 2px auto;
+}
+.category-toggle * {
+	display: block;
+	position: absolute;
+	inset: 0;
+}
+.category-toggle input {
+	appearance: none;
+	margin: 0;
+	cursor: pointer;
+}
+.category-toggle div {
+	pointer-events: none;
+}
+.category-toggle-border {
+	background-color: #ECE8E3;
+	clip-path: path("M 11.25 0 L 0 11.5 L 11.25 23 L 33.75 23 L 45 11.5 L 33.75 0 L 11.25 0 z  M 12.716797 1.5 L 32.283203 1.5 L 42.064453 11.5 L 32.283203 21.5 L 12.716797 21.5 L 2.9355469 11.5 L 12.716797 1.5 z");
+}
+.category-toggle-button {
+	background-color: #6D7D85;
+	clip-path: path("m 5,11.499999 7.45703,-7.4570295 7.457029,7.4570295 -7.457031,7.457032 z");
+	transition: transform 0.15s, background-color 0.15s;
+}
+
+.category-toggle input:hover ~ .category-toggle-border {
+	background-color: #47FFBF;
+}
+.category-toggle input:checked ~ .category-toggle-button {
+	background-color: #47FFBF;
+	transform: translateX(20.086px);
 }

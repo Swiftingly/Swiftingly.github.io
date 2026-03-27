@@ -3,7 +3,6 @@ const DUELIST_LIST = [ "Phoenix", "Jett", "Reyna", "Raze", "Yoru", "Neon", "Iso"
 const SENTINEL_LIST = [ "Killjoy", "Cypher", "Sage", "Chamber", "Deadlock", "Vyse", "Veto" ].sort();
 const CONTROLLER_LIST = [ "Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove", "Miks" ].sort();
 
-
 var initiatorCategory = document.getElementById("initiator");
 var duelistCategory = document.getElementById("duelist");
 var sentinelCategory = document.getElementById("sentinel");
@@ -17,23 +16,48 @@ var included_all = [...INITIATOR_LIST, ...DUELIST_LIST, ...SENTINEL_LIST, ...CON
 
 var unincluded_all = [];
 
-var portraitMap = new Map();
-var agentTypeMap = new Map();
-var agentIncludeMap = new Map();
+var portraitMap = new Map();     // NAME -> PORTRAIT
+var agentTypeMap = new Map();    // NAME -> TYPE
+var agentIncludeMap = new Map(); // NAME -> LIST
+var toggleMap = new Map();       // TYPE -> TOGGLE
 
 function ListRemove(list, item) {
 	let index = list.indexOf(item);
 	if (index != -1) list.splice(index, 1);
+}
+function ElementsAddClass(elements, class_name) {
+	for (let element of elements) {
+		element.classList.add(class_name);
+	}
+}
+function ElementsRemoveClass(elements, class_name) {
+	for (let element of elements) {
+		element.classList.remove(class_name);
+	}
 }
 
 function GetPortraitSrc(name) {
 	return `/valorant/assets/agent-portraits/${agentTypeMap.get(name)}/${name.replace(/[\.\:\/]/g, '_')}.webp`;
 }
 
+var saving = false;
+function StartSave() {
+	if (!saving) {
+		saving = true;
+		setTimeout(function() {
+			saving = false;
+			localStorage.setItem("valorant-random-agent-save", unincluded_all.join(','));
+		}, 500);
+	}
+}
+
 function ToggleInclusion(name, save = true) {
 	let index = included_all.indexOf(name);
 	let portrait = portraitMap.get(name);
 	let included_list = agentIncludeMap.get(name);
+	
+	let type = agentTypeMap.get(name);
+	var toggle = toggleMap.get(type);
 	
 	if (index == -1) {
 		included_all.push(name);
@@ -48,9 +72,9 @@ function ToggleInclusion(name, save = true) {
 		portrait.classList.add("agent-container-off");
 	}
 	
-	if (save) {
-		localStorage.setItem("valorant-random-agent-save", unincluded_all.join(','));
-	}
+	toggle.checked = included_list.length > 0;
+	
+	if (save) StartSave();
 }
 
 function CreatePortrait(name, type, included_list) {
@@ -92,18 +116,52 @@ function CreatePortrait(name, type, included_list) {
 	return div;
 }
 
-function CategoryFill(category, name_list, type, included_list) {
+function ToggleCategory(included_list, full_list) {
+	ToggleUnhover(full_list);
+	if (this.checked) {
+		for (var name of full_list) {
+			if (!included_list.includes(name)) ToggleInclusion(name);
+		}
+	}
+	else {
+		for (var name of full_list) {
+			if (included_list.includes(name)) ToggleInclusion(name);
+		}
+	}
+}
+
+function ToggleHover(name_list) {
+	for (var name of name_list) {
+		var portrait = portraitMap.get(name);
+		portrait.classList.add(this.checked ? "hover-remove" : "hover-add");
+	}
+}
+function ToggleUnhover(name_list) {
+	for (var name of name_list) {
+		var portrait = portraitMap.get(name);
+		portrait.classList.remove("hover-add");
+		portrait.classList.remove("hover-remove");
+	}
+}
+
+function CategoryFill(category, name_list, type, included_list, toggle_id) {
 	var list = category.querySelector('.agent-list');
 	
 	for (var name of name_list) {
 		list.appendChild(CreatePortrait(name, type, included_list));
 	}
+	
+	var element = document.getElementById(toggle_id);
+	toggleMap.set(type, element);
+	element.addEventListener('change', ToggleCategory.bind(element, included_list, name_list));
+	element.addEventListener('mouseenter', ToggleHover.bind(element, name_list));
+	element.addEventListener('mouseleave', ToggleUnhover.bind(element, name_list));
 }
 
-CategoryFill(initiatorCategory, INITIATOR_LIST, 'initiator', included_initiator);
-CategoryFill(duelistCategory, DUELIST_LIST, 'duelist', included_duelist);
-CategoryFill(sentinelCategory, SENTINEL_LIST, 'sentinel', included_sentinel);
-CategoryFill(controllerCategory, CONTROLLER_LIST, 'controller', included_controller);
+CategoryFill(initiatorCategory, INITIATOR_LIST, 'initiator', included_initiator, 'initiator-toggle');
+CategoryFill(duelistCategory, DUELIST_LIST, 'duelist', included_duelist, 'duelist-toggle');
+CategoryFill(sentinelCategory, SENTINEL_LIST, 'sentinel', included_sentinel, 'sentinel-toggle');
+CategoryFill(controllerCategory, CONTROLLER_LIST, 'controller', included_controller, 'controller-toggle');
 
 var save = localStorage.getItem("valorant-random-agent-save");
 if (save != null && save.length > 0) {
@@ -172,27 +230,23 @@ function NameRemove() {
 	imgElement.src = "";
 	nameElement.innerHTML = "";
 }
-
-document.getElementById("random-initiator").addEventListener("click", RandomClick.bind(this, included_initiator));
-document.getElementById("random-duelist").addEventListener("click", RandomClick.bind(this, included_duelist));
-document.getElementById("random-sentinel").addEventListener("click", RandomClick.bind(this, included_sentinel));
-document.getElementById("random-controller").addEventListener("click", RandomClick.bind(this, included_controller));
-document.getElementById("random-all-roles").addEventListener("click", RandomClick.bind(this, included_all));
-
-document.getElementById("random-initiator").addEventListener("mouseenter", RandomHoverStart.bind(this, included_initiator));
-document.getElementById("random-duelist").addEventListener("mouseenter", RandomHoverStart.bind(this, included_duelist));
-document.getElementById("random-sentinel").addEventListener("mouseenter", RandomHoverStart.bind(this, included_sentinel));
-document.getElementById("random-controller").addEventListener("mouseenter", RandomHoverStart.bind(this, included_controller));
-document.getElementById("random-all-roles").addEventListener("mouseenter", RandomHoverStart.bind(this, included_all));
-
-document.getElementById("random-initiator").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_initiator));
-document.getElementById("random-duelist").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_duelist));
-document.getElementById("random-sentinel").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_sentinel));
-document.getElementById("random-controller").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_controller));
-document.getElementById("random-all-roles").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_all));
-
 document.getElementById("keep").addEventListener("click", NameKeep);
 document.getElementById("remove").addEventListener("click", NameRemove);
+
+var RANDOM_BUTTON_LIST = [
+	["random-initiator", included_initiator],
+	["random-duelist", included_duelist],
+	["random-sentinel", included_sentinel],
+	["random-controller", included_controller],
+	["random-all-roles", included_all]
+];
+
+for (let items of RANDOM_BUTTON_LIST) {
+	var element = document.getElementById(items[0]);
+	element.addEventListener("click", RandomClick.bind(element, items[1]));
+	element.addEventListener("mouseenter", RandomHoverStart.bind(element, items[1]));
+	element.addEventListener("mouseleave", RandomHoverEnd.bind(element, items[1]));
+}
 
 document.getElementById("add-all").addEventListener("click", function() {
 	while (unincluded_all.length > 0) {
@@ -223,5 +277,16 @@ document.getElementById("remove-all").addEventListener("mouseenter", function() 
 document.getElementById("remove-all").addEventListener("mouseleave", function() {
 	for (portrait of portraitMap.values()) {
 		portrait.classList.remove("hover-remove");
+	}
+});
+
+document.getElementById("add-all").addEventListener("click", function() {
+	while (unincluded_all.length > 0) {
+		ToggleInclusion(unincluded_all[unincluded_all.length - 1]);
+	}
+});
+document.getElementById("remove-all").addEventListener("click", function() {
+	while (included_all.length > 0) {
+		ToggleInclusion(included_all[included_all.length - 1]);
 	}
 });
