@@ -209,3 +209,51 @@ hr {
 .hidden {
 	display: none !important;
 }
+
+.category-toggle {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	margin: 2px auto;
+	
+	background-color: #1D253A;
+	border: 1px solid #A1A2A5;
+	border-radius: 2px;
+	
+	transition: transform 0.05s, background-color 0.05s;
+}
+.category-toggle * {
+	display: block;
+	position: absolute;
+	inset: 0;
+}
+.category-toggle input {
+	appearance: none;
+	margin: 0;
+	cursor: pointer;
+}
+.category-toggle .checkmark {
+	pointer-events: none;
+	display: none;
+	left: -6px;
+	top: -5px;
+	font-size: 16pt;
+	font-weight: bold;
+	color: #1DEFEF;
+}
+.category-toggle input:checked ~ .checkmark {
+	display: block;
+}
+.category-toggle div {
+	pointer-events: none;
+}
+.category-toggle:has(input:hover) {
+	background-color: #084747;
+	border: 1px solid white;
+	transform: scale(1.15);
+}
+.category-toggle input:checked ~ .category-toggle-button {
+	background-color: #47FFBF;
+	transform: translateX(20.086px);
+}

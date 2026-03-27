@@ -17,6 +17,7 @@ var unincluded_all = [];
 var portraitMap = new Map();
 var heroTypeMap = new Map();
 var heroIncludeMap = new Map();
+var toggleMap = new Map();
 
 function ListRemove(list, item) {
 	let index = list.indexOf(item);
@@ -27,10 +28,24 @@ function GetPortraitSrc(name) {
 	return `/overwatch/assets/hero-portraits/${heroTypeMap.get(name)}/${name.replace(/[\.\:]/g, '_')}.webp`;
 }
 
+var saving = false;
+function StartSave() {
+	if (!saving) {
+		saving = true;
+		setTimeout(function() {
+			saving = false;
+			localStorage.setItem("overwatch-random-hero-save", unincluded_all.join(','));
+		}, 500);
+	}
+}
+
 function ToggleInclusion(name, save = true) {
 	let index = included_all.indexOf(name);
 	let portrait = portraitMap.get(name);
 	let included_list = heroIncludeMap.get(name);
+	
+	let type = heroTypeMap.get(name);
+	var toggle = toggleMap.get(type);
 	
 	if (index == -1) {
 		included_all.push(name);
@@ -45,9 +60,9 @@ function ToggleInclusion(name, save = true) {
 		portrait.classList.add("hero-container-off");
 	}
 	
-	if (save) {
-		localStorage.setItem("overwatch-random-hero-save", unincluded_all.join(','));
-	}
+	toggle.checked = included_list.length > 0;
+	
+	if (save) StartSave();
 }
 
 function CreatePortrait(name, type, included_list) {
@@ -95,17 +110,51 @@ function CreatePortrait(name, type, included_list) {
 	return div;
 }
 
-function CategoryFill(category, name_list, type, included_list) {
+function ToggleCategory(included_list, full_list) {
+	ToggleUnhover(full_list);
+	if (this.checked) {
+		for (var name of full_list) {
+			if (!included_list.includes(name)) ToggleInclusion(name);
+		}
+	}
+	else {
+		for (var name of full_list) {
+			if (included_list.includes(name)) ToggleInclusion(name);
+		}
+	}
+}
+
+function ToggleHover(name_list) {
+	for (var name of name_list) {
+		var portrait = portraitMap.get(name);
+		portrait.classList.add(this.checked ? "hover-remove" : "hover-add");
+	}
+}
+function ToggleUnhover(name_list) {
+	for (var name of name_list) {
+		var portrait = portraitMap.get(name);
+		portrait.classList.remove("hover-add");
+		portrait.classList.remove("hover-remove");
+	}
+}
+
+function CategoryFill(category, name_list, type, included_list, toggle_id) {
 	var list = category.querySelector('.hero-list');
 	
 	for (var name of name_list) {
 		list.appendChild(CreatePortrait(name, type, included_list));
 	}
+	
+	var element = document.getElementById(toggle_id);
+	toggleMap.set(type, element);
+	element.addEventListener('change', ToggleCategory.bind(element, included_list, name_list));
+	element.addEventListener('mouseenter', ToggleHover.bind(element, name_list));
+	element.addEventListener('mouseleave', ToggleUnhover.bind(element, name_list));
 }
 
-CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank);
-CategoryFill(damageCategory, DAMAGE_LIST, 'damage', included_damage);
-CategoryFill(supportCategory, SUPPORT_LIST, 'support', included_support);
+CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank, 'tank-toggle');
+CategoryFill(damageCategory, DAMAGE_LIST, 'damage', included_damage, 'damage-toggle');
+CategoryFill(supportCategory, SUPPORT_LIST, 'support', included_support, 'support-toggle');
 
 var save = localStorage.getItem("overwatch-random-hero-save");
 if (save != null && save.length > 0) {
@@ -173,26 +222,22 @@ function NameRemove() {
 	imgElement.src = "";
 	nameElement.innerText = "";
 }
-
-document.getElementById("random-tank").addEventListener("click", RandomClick.bind(this, included_tank));
-document.getElementById("random-damage").addEventListener("click", RandomClick.bind(this, included_damage));
-document.getElementById("random-support").addEventListener("click", RandomClick.bind(this, included_support));
-document.getElementById("random-all-roles").addEventListener("click", RandomClick.bind(this, included_all));
-
-
-document.getElementById("random-tank").addEventListener("mouseenter", RandomHoverStart.bind(this, included_tank));
-document.getElementById("random-damage").addEventListener("mouseenter", RandomHoverStart.bind(this, included_damage));
-document.getElementById("random-support").addEventListener("mouseenter", RandomHoverStart.bind(this, included_support));
-document.getElementById("random-all-roles").addEventListener("mouseenter", RandomHoverStart.bind(this, included_all));
-
-
-document.getElementById("random-tank").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_tank));
-document.getElementById("random-damage").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_damage));
-document.getElementById("random-support").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_support));
-document.getElementById("random-all-roles").addEventListener("mouseleave", RandomHoverEnd.bind(this, included_all));
-
 document.getElementById("keep").addEventListener("click", NameKeep);
 document.getElementById("remove").addEventListener("click", NameRemove);
+
+var RANDOM_BUTTON_LIST = [
+	["random-tank", included_tank],
+	["random-damage", included_damage],
+	["random-support", included_support],
+	["random-all-roles", included_all],
+];
+
+for (let items of RANDOM_BUTTON_LIST) {
+	var element = document.getElementById(items[0]);
+	element.addEventListener("click", RandomClick.bind(element, items[1]));
+	element.addEventListener("mouseenter", RandomHoverStart.bind(element, items[1]));
+	element.addEventListener("mouseleave", RandomHoverEnd.bind(element, items[1]));
+}
 
 document.getElementById("add-all").addEventListener("click", function() {
 	while (unincluded_all.length > 0) {

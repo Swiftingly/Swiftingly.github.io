@@ -3,6 +3,10 @@
 	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
 }
 @font-face {
+	font-family: Valorant;
+	src: url("/valorant/Valorant.ttf") format("truetype");
+}
+@font-face {
 	font-family: Simpact;
 	src: local("Impact");
 	size-adjust: 85%;
@@ -11,31 +15,52 @@
 html, body {
 	font-family: Tungsten-Bold, Simpact;
 	font-size: max(24pt, 6vh);
-	background-color: #55384B;
+	background-color: #101A24;
 	color: #ECE8E1;
 	margin: 0;
 	margin-left: 20px;
 	height: 100%;
-	letter-spacing: 1px;
 	white-space: nowrap;
 }
 h1 {
-	margin-top: 0;
+	margin-top: 12px;
+	margin-bottom: 0;
+	font-family: Valorant;
 	font-weight: normal;
 	font-size: max(48pt, 12vh);
-	margin-bottom: 0;
 }
 
 div {
-	margin-left: 20px;
+	margin-left: 24px;
+	margin-bottom: 6px;
 }
 
 a {
+	letter-spacing: 1px;
+	position: relative;
 	color: #ECE8E1;
-	font-style: italic;
+	font-style: normal;
 	text-decoration: none;
+	
 	transition: 0.2s;
+	text-transform: uppercase;
 }
 a:hover {
-	color: #FF4558;
+	color: #FF4655;
+}
+a::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	background-color: #FF4655;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+	transition: transform 0.2s ease-out;
+}
+a:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }

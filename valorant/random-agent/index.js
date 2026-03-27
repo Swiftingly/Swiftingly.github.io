@@ -25,16 +25,6 @@ function ListRemove(list, item) {
 	let index = list.indexOf(item);
 	if (index != -1) list.splice(index, 1);
 }
-function ElementsAddClass(elements, class_name) {
-	for (let element of elements) {
-		element.classList.add(class_name);
-	}
-}
-function ElementsRemoveClass(elements, class_name) {
-	for (let element of elements) {
-		element.classList.remove(class_name);
-	}
-}
 
 function GetPortraitSrc(name) {
 	return `/valorant/assets/agent-portraits/${agentTypeMap.get(name)}/${name.replace(/[\.\:\/]/g, '_')}.webp`;

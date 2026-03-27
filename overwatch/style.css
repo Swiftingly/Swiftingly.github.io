@@ -23,7 +23,7 @@ html, body {
 	margin: 0;
 }
 
-h1, a {
+h1 {
 	margin: 8px;
 }
 h1 {
@@ -34,11 +34,17 @@ h1 {
 	text-transform: uppercase;
 }
 a {
+	margin-left: 24px;
+	padding: 8px;
 	text-decoration: none;
-	color: #ED6516;
+	color: transparent;
+	background-color: white;
 	font-size: 36pt;
-	transition: 0.3s;
+	transition: 0.2s;
+	background: linear-gradient(to bottom, #AAA 5%, white 80%);
+	background-clip: text;
 }
 a:hover {
-	letter-spacing: 4px;
+	letter-spacing: 3px;
+	color: #ED6516;
 }

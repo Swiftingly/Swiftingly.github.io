@@ -3,6 +3,10 @@
 	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
 }
 @font-face {
+	font-family: Valorant;
+	src: url("/valorant/Valorant.ttf") format("truetype");
+}
+@font-face {
 	font-family: Simpact;
 	src: local("Impact");
 	size-adjust: 85%;
@@ -12,7 +16,7 @@ html, body {
 	font-size: 3.8vh;
 	margin: auto;
 	text-align: center;
-	background-color: #55384B;
+	background-color: #101A24;
 	color: #ECE8E1;
 }
 body {
@@ -26,12 +30,13 @@ div {
 p, h1, h2 {
 	margin-top: 0;
 	margin-bottom: 0;
+	font-weight: normal;
 }
 
 input[type="number"] {
 	font-family: Tungsten-Bold, Simpact;
 	text-align: center;
-	background-color: #382531;
+	background-color: #0000007F;
 	font-size: 24pt;
 	width: 72pt;
 	height: 40px;
