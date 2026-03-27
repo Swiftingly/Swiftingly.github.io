@@ -24,7 +24,8 @@ html, body {
 }
 
 h1 {
-	margin: 8px;
+	margin-top: 40px;
+	margin-left: 36px;
 }
 h1 {
 	font-family: Bank-Sans, serif;
@@ -33,8 +34,8 @@ h1 {
 	margin-bottom: 12px;
 	text-transform: uppercase;
 }
-a {
-	margin-left: 24px;
+div a {
+	margin-left: 40px;
 	padding: 8px;
 	text-decoration: none;
 	color: transparent;
@@ -44,7 +45,7 @@ a {
 	background: linear-gradient(to bottom, #AAA 5%, white 80%);
 	background-clip: text;
 }
-a:hover {
+div a:hover {
 	letter-spacing: 3px;
 	color: #ED6516;
 }

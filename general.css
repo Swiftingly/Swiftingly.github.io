@@ -1,0 +1,15 @@
+#back {
+	position:fixed;
+	z-index:3;
+	top:12px;
+	left:12px;
+	width:36px;
+	height:36px;
+	background: url("/assets/back.svg");
+	background-size: cover;
+	border: 1px solid transparent;
+	transition: 0.1s;
+}
+#back:hover {
+	border: 1px solid white;
+}
