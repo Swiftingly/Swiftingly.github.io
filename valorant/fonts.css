@@ -1,0 +1,8 @@
+@font-face {
+	font-family: Tungsten-Bold;
+	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
+}
+@font-face {
+	font-family: Valorant;
+	src: url("/valorant/Valorant.ttf") format("truetype");
+}

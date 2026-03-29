@@ -1,25 +1,19 @@
-@font-face {
-	font-family: 'Overwatch';
-	src: url('/overwatch/assets/bignoodletoo.woff2') format('woff2');
+html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
 }
-@font-face {
-	font-family: 'Bank-Sans';
-	src: url('/overwatch/assets/BankSans.otf') format('opentype');
-}
-
 body {
 	background: linear-gradient(#1D4068 0%, #525F6D 45%, #525F6D 55%, #112F51 100%);
 	background-repeat: no-repeat;
 	background-color: #112F51;
-}
-html, body {
+	
 	font-family: 'Overwatch', sans-serif;
-	font-size: 24pt;
+	font-size: 3vw;
 	font-style: italic;
 	
 	color: White;
 	
-	height: 100%;
 	margin: 0;
 }
 
@@ -30,12 +24,12 @@ h1 {
 h1 {
 	font-family: Bank-Sans, serif;
 	font-style: normal;
-	font-size: 48pt;
-	margin-bottom: 12px;
+	font-size: 1.5em;
+	margin-bottom: 0.25em;
 	text-transform: uppercase;
 }
 div a {
-	margin-left: 40px;
+	margin-left: 1em;
 	padding: 8px;
 	text-decoration: none;
 	color: transparent;
@@ -48,4 +42,10 @@ div a {
 div a:hover {
 	letter-spacing: 3px;
 	color: #ED6516;
+}
+
+@media (max-aspect-ratio: 1.2) {
+	body {
+		font-size: 7vw;
+	}
 }

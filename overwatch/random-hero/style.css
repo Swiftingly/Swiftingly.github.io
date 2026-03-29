@@ -1,32 +1,19 @@
-@font-face {
-	font-family: 'Overwatch';
-	src: url('/overwatch/assets/bignoodletoo.woff2') format('woff2');
-}
-@font-face {
-	font-family: 'Bank-Sans';
-	src: url('/overwatch/assets/BankSans.otf') format('opentype');
-}
-
 body {
 	background: linear-gradient(#1D4068 0%, #525F6D 45%, #525F6D 55%, #112F51 100%);
 	background-repeat: no-repeat;
 	background-color: #112F51;
-}
-html, body {
+	
 	font-family: 'Overwatch', sans-serif;
-	font-size: 24pt;
+	font-size: 2vw;
 	font-style: italic;
 	
 	color: White;
 	
-	margin: auto;
 	text-align: center;
-}
-body {
+	
     margin: 20px;
-}
-div {
-	width: 100%;
+	
+	-webkit-tap-highlight-color: transparent;
 }
 
 p, h1, h2, h3 {
@@ -34,27 +21,24 @@ p, h1, h2, h3 {
 	margin-bottom: 0;
 }
 h1 {
-	font-family: Bank-Sans, serif;
+	font-family: Bank-Sans, sans-serif;
 	font-style: normal;
-	font-size: 36pt;
+	font-size: 1.5em;
 	margin-bottom: 12px;
 }
 
 #container {
 	margin: auto;
 	display: flex;
-	max-width: 1400px;
 }
 #container h2 {
 	background-color: #ED6516;
 	border-radius: 4px;
+	font-size: 1.5em;
 }
 .category {
-	display: flex;
-	flex-direction: row;
-	flex-flow: column;
-	height: 100%;
 	margin: 4px;
+	flex: 1;
 }
 .category h2 {
 	user-select: none;
@@ -69,13 +53,14 @@ h1 {
 	margin: 2px;
 	width: fit-content;
 	background-color: white;
-	padding: 4px;
+	padding: 0.12em;
 	border-radius: 4px;
 	cursor: pointer;
 	user-select: none;
 	touch-action: manipulation;
 	box-shadow: 0px 0px 4px black;
 	transition: transform 0.1s, opacity 0.1s;
+	font-size: 1em;
 }
 .hero-container:hover:not(.no-hover) {
 	transform: scale(1.1, 1.1);
@@ -87,12 +72,12 @@ h1 {
 }
 .hero-container h3 {
 	color: Black;
-	font-size: 20pt;
+	font-size: 0.83em;
 	font-weight: normal;
-	padding: 2px;
+	padding: 0.06em;
 }
 .hero-container img {
-	width: 60px;
+	width: 1.875em;
 	background-color: #C8DDF8;
 }
 .hero-container-off {
@@ -114,14 +99,13 @@ h1 {
 
 button {
 	font-family: 'Overwatch', sans-serif;
-	font-size: 28pt;
+	font-size: 1.16em;
 	font-style: italic;
 	color: Black;
 	
 	margin: 0 auto;
 	
-	width: 260px;
-	height: 60px;
+	padding: 0.2em 1.5em;
 	background-color: White;
 	border: 0;
 	border-radius: 4px;
@@ -130,23 +114,22 @@ button {
 	box-shadow: 0px 0px 0px black;
 }
 button:hover {
-	letter-spacing: 2px;
 	cursor: pointer;
 	color: #333;
 	box-shadow: 0px 0px 12px black;
-	transform: scale(1.1, 1.1);
+	transform: scale(1.2, 1.2);
 	z-index: 1;
 }
 #add-all, #random-all-roles, #remove-all {
-	margin: 0 20px;
+	margin: 0.4em;
 }
 .small-button {
-	width: 240px;
-	height: 50px;
-	font-size: 24pt;
+	width: 8em;
+	padding: 0.14em 1em;
+	font-size: 1em;
 }
 .small-button:hover {
-	transform: scale(1.2, 1.2);
+	transform: scale(1.15, 1.15);
 }
 #add-all {
 	border: 3px solid #3AE83F;
@@ -173,6 +156,7 @@ button:hover {
 	z-index: 2;
 }
 #reveal-zone div {
+	width: 100%;
 	height: 100%;
 	align-items: center;
 	display: flex;
@@ -183,6 +167,7 @@ button:hover {
 #reveal-zone img {
 	border: 3px solid White;
 	border-radius: 3px;
+	width: 8em;
 }
 #reveal-zone h2 {
 	text-align: center;
@@ -236,9 +221,9 @@ hr {
 .category-toggle .checkmark {
 	pointer-events: none;
 	display: none;
-	left: -6px;
-	top: -5px;
-	font-size: 16pt;
+	left: -0.25em;
+	top: -0.21em;
+	font-size: 0.67em;
 	font-weight: bold;
 	color: #1DEFEF;
 }
@@ -256,4 +241,13 @@ hr {
 .category-toggle input:checked ~ .category-toggle-button {
 	background-color: #47FFBF;
 	transform: translateX(20.086px);
+}
+
+@media (max-aspect-ratio: 1.2) {
+	body {
+		font-size: 6vw;
+	}
+	#container {
+		flex-direction: column;
+	}
 }

@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'Overwatch';
+	src: url('/overwatch/assets/bignoodletoo.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Bank-Sans';
+	src: url('/overwatch/assets/BankSans.otf') format('opentype');
+}

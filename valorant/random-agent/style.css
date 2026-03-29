@@ -1,28 +1,12 @@
-@font-face {
-	font-family: Tungsten-Bold;
-	src: url("/valorant/Tungsten-Bold.otf") format("opentype");
-}
-@font-face {
-	font-family: Valorant;
-	src: url("/valorant/Valorant.ttf") format("truetype");
-}
-@font-face {
-	font-family: Simpact;
-	src: local("Impact");
-	size-adjust: 85%;
-}
-
-html, body {
-	font-family: Tungsten-Bold, Simpact;
-	font-size: 24pt;
+body {
+	font-family: Tungsten-Bold, sans-serif;
+	font-size: 2.1vw;
 	
 	color: #ECE8E1;
 	
-	margin: auto;
 	text-align: center;
 	background-color: #101A24;
-}
-body {
+	
     margin: 20px;
 }
 p, h1, h2, h3 {
@@ -32,24 +16,22 @@ p, h1, h2, h3 {
 }
 h1 {
 	font-family: Valorant;
+	font-size: 2em;
 }
 
 #container {
 	margin: auto;
 	display: flex;
-	max-width: 1400px;
 }
 #container h2 {
 	background-color: #FF4655BB;
 	border: 2px solid #FF4655;
 	border-radius: 2px;
+	font-size: 1.5em;
 }
 .category {
-	display: flex;
-	flex-direction: row;
-	flex-flow: column;
-	height: 100%;
 	margin: 4px;
+	flex: 1;
 }
 .category h2 {
 	user-select: none;
@@ -64,13 +46,14 @@ h1 {
 	margin: 2px;
 	width: fit-content;
 	background: linear-gradient(#101A24, #1d4f48);
-	padding: 4px;
+	padding: 0.12em;
 	border: 1px solid #47FFBF;
 	border-radius: 4px;
 	cursor: pointer;
 	user-select: none;
 	touch-action: manipulation;
 	transition: transform 0.1s;
+	font-size: 1em;
 }
 .agent-container:hover {
 	border: 1px solid #ECE8E1;
@@ -81,12 +64,12 @@ h1 {
 }
 .agent-container h3 {
 	color: #ECE8E1;
-	font-size: 20pt;
-	padding: 2px;
+	font-size: 0.83em;
+	padding: 0.06em;
 	text-transform: uppercase;
 }
 .agent-container img {
-	width: 60px;
+	width: 1.875em;
 	background: linear-gradient(#1A222D, #2F3942);
 }
 .agent-container-off {
@@ -109,14 +92,13 @@ h1 {
 }
 
 button {
-	font-family: Tungsten-Bold, Simpact;
-	font-size: 28pt;
+	font-family: Tungsten-Bold, sans-serif;
+	font-size: 1.16em;
 	color: #ECE8E1;
 	
 	margin: 0 auto;
 	
-	width: 260px;
-	height: 60px;
+	padding: 0.2em 1.5em;
 	background-color: transparent;
 	background: linear-gradient(#101A24, #1d4f48);
 	border: 2px solid #ECE8E1;
@@ -126,19 +108,18 @@ button {
 	box-shadow: 0px 0px 0px black;
 }
 button:hover {
-	letter-spacing: 2px;
 	cursor: pointer;
 	box-shadow: 0px 0px 12px black;
 	transform: scale(1.1, 1.1);
 	z-index: 1;
 }
 #add-all, #random-all-roles, #remove-all {
-	margin: 0 20px;
+	margin: 0.6em;
 }
 .small-button {
-	width: 240px;
-	height: 50px;
-	font-size: 24pt;
+	width: 8em;
+	padding: 0.14em 1em;
+	font-size: 1em;
 }
 .small-button:hover {
 	transform: scale(1.2, 1.2);
@@ -180,6 +161,7 @@ button:hover {
 #reveal-zone img {
 	border: 3px solid White;
 	border-radius: 3px;
+	width: 8em;
 }
 #reveal-zone h2 {
 	text-align: center;
@@ -243,4 +225,13 @@ hr {
 .category-toggle input:checked ~ .category-toggle-button {
 	background-color: #47FFBF;
 	transform: translateX(20.086px);
+}
+
+@media (max-aspect-ratio: 1.2) {
+	body {
+		font-size: 6vw;
+	}
+	#container {
+		flex-direction: column;
+	}
 }

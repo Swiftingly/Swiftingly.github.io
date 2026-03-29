@@ -55,14 +55,14 @@ const attackStrats = [
 	'Protect the president:The bottom frag is the President, and they are the only one allowed to plant the spike and they cannot use guns. '+
 	'The team must surround the President and protect them for the entire around',
 	'Odin Rush:Everyone must buy either Odin, Ares, or Frenzy if they can afford it, in that order',
-	'Bounty Hunter:At the start of the round everyone is assigned a player to kill in leaderboard order. If you fail to kill them you have to use a classic for the next round',
+	/*might be both*/'Bounty Hunter:At the start of the round everyone is assigned a player to kill in leaderboard order. If you fail to kill them you have to use a classic for the next round',
 	
 ];
 const bothStrats = [
 	'Motivational speech:One player on your team must give a speech at the beginning of the round. No one can leave spawn until they finish',
 	'Knives Out: You can only move when you are holding your knife',
 	'Evasive Maneuvers:You must jump every time you peak a corner',
-	'Focused:No one is allowed to communicate on the team (this includes pings)',
+	'Focused:No one is allowed to communicate on the team (and no pings)',
 	'Spray and Pray:When you see someone you have to unload your entire magazine',
 	'Follow the leader:The top frag is the leader, everyone must follow them in a single file line. '+
 	'When they die, the next person becomes leader',
@@ -75,6 +75,8 @@ const bothStrats = [
 	'Peace Keeper:You can\'t shoot first',
 	'Secret Santa:No player may buy their own weapon.',
 	'Bonus Pistol:This round is a pistol round.',
+	'This is how it\'s done:Only the highest fragging person still alive can shoot their gun',
+	'Running Laps:Everyone on the team has to run to the enemy spawn and back to ally spawn before the round can be ended (before planting/defusing or killing the last player)',
 ];
 
 var side = '';
