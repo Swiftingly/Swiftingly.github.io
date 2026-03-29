@@ -239,4 +239,7 @@ hr {
 	#container {
 		flex-direction: column;
 	}
+	#reveal-zone {
+		font-size: 0.75em;
+	}
 }
