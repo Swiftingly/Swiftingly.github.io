@@ -199,9 +199,8 @@ hr {
 
 .category-toggle {
 	position: relative;
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
+	width: 0.63em;
+	height: 0.63em;
 	margin: 2px auto;
 	
 	background-color: #1D253A;
@@ -232,17 +231,10 @@ hr {
 .category-toggle input:checked ~ .checkmark {
 	display: block;
 }
-.category-toggle div {
-	pointer-events: none;
-}
 .category-toggle:has(input:hover) {
 	background-color: #084747;
 	border: 1px solid white;
 	transform: scale(1.15);
-}
-.category-toggle input:checked ~ .category-toggle-button {
-	background-color: #47FFBF;
-	transform: translateX(20.086px);
 }
 
 @media (max-aspect-ratio: 1.2) {

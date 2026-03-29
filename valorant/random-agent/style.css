@@ -231,7 +231,10 @@ hr {
 
 @media (max-aspect-ratio: 1.2) {
 	body {
-		font-size: 6vw;
+		font-size: 8vw;
+	}
+	h1 {
+		font-size: 1.5em;
 	}
 	#container {
 		flex-direction: column;
