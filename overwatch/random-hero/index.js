@@ -148,8 +148,6 @@ function CategoryFill(category, name_list, type, included_list, toggle_id) {
 	var element = document.getElementById(toggle_id);
 	toggleMap.set(type, element);
 	element.addEventListener('change', ToggleCategory.bind(element, included_list, name_list));
-	element.addEventListener('mouseenter', ToggleHover.bind(element, name_list));
-	element.addEventListener('mouseleave', ToggleUnhover.bind(element, name_list));
 }
 
 CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank, 'tank-toggle');

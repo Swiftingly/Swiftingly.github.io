@@ -1,48 +1,117 @@
-html, body {
-	font-family: Arial;
-	font-size: max(16pt, 3vh);
+@font-face {
+	font-family: PressStart2P;
+	src: url("/assets/PressStart2P-Regular.ttf") format("truetype");
+}
+html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+body {
+	font-family: PressStart2P;
+	font-size: 12pt;
 	
 	color: white;
 	margin: 0;
 	
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	
+	background: url("/assets/background.png");
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+    background-position: center center;
+	background-color: black;
+	text-align: center;
 }
 
-::selection {
-	background-color: #C3FF00;
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	padding-top: 120px;
+	width: 1000px;
 }
-
-body {
-	background: linear-gradient(135deg, #FF4E8B, #FF9741);
-}
-
-div {
-	margin-left: 20px;
-}
-
-a:link {
-	color: White;
+.site-container {
+	flex: 0 0 auto;
+	
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	
+	margin: 10px;
+	
+	width: 200px;
+	height: 250px;
+	
+	color: white;
 	text-decoration: none;
-	transition: linear 0.2s;
-	text-shadow:
-		1.5px 0px 1.5px Black,
-		1.5px 1.5px 1.5px Black,
-		0px 1.5px 1.5px Black,
-		-1.5px 1.5px 1.5px Black,
-		-1.5px 0px 1.5px Black,
-		-1.5px -1.5px 1.5px Black,
-		0px -1.5px 1.5px Black,
-		1.5px -1.5px 1.5px Black;
+	user-select: none;
+	transition: 0.2s;
 }
-a:visited {
-	color: White;
+.site-container:hover {
+	transform: scale(1.1, 1.1);
 }
-a:hover {
-	letter-spacing: 6px;
-	color: #808080;
-	font-style: italic;
+.site-container:before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 6px solid #FF0000;
+	border-radius: 18px;
+	z-index: -2;
+	transition: 0.2s;
+	mix-blend-mode: screen;
+}
+.site-container:hover:before {
+	transform: translate(-3px, -3px);
+	border: 6px solid #FF0000;
+}
+.site-container:after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 6px solid #00FFFF;
+	border-radius: 18px;
+	z-index: -2;
+	transition: 0.2s;
+	mix-blend-mode: screen;
+}
+.site-container:hover:after {
+	transform: translate(3px, 3px);
+	border: 6px solid #00FFFF;
+}
+
+.border {
+	position: absolute;
+	inset: 0;
+	border: 3px solid white;
+	border-radius: 18px;
+}
+.site-container img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	filter: grayscale(75%) brightness(30%);
+	transition: 0.2s;
+	border-radius: 18px;
+}
+.site-container:hover img {
+	filter: grayscale(25%) brightness(70%);
+}
+.site-container p {
+	font-size: 12pt;
+	line-height: 1.1;
+}
+.site-container span {
+	font-size: 22pt;
+}
+.site-container h2 {
+	font-size: 16pt;
+	line-height: 1.1;
 }
 
 #mike {
