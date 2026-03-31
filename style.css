@@ -55,46 +55,14 @@ body {
 .site-container:hover {
 	transform: scale(1.1, 1.1);
 }
-.site-container:before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border: 6px solid #FF0000;
-	border-radius: 18px;
-	z-index: -2;
-	transition: 0.2s;
-	mix-blend-mode: screen;
-}
-.site-container:hover:before {
-	transform: translate(-3px, -3px);
-	border: 6px solid #FF0000;
-}
-.site-container:after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border: 6px solid #00FFFF;
-	border-radius: 18px;
-	z-index: -2;
-	transition: 0.2s;
-	mix-blend-mode: screen;
-}
-.site-container:hover:after {
-	transform: translate(3px, 3px);
-	border: 6px solid #00FFFF;
+.site-container p, .site-container h2 {
+	z-index: 1;
 }
 
-.border {
-	position: absolute;
-	inset: 0;
-	border: 3px solid white;
-	border-radius: 18px;
-}
 .site-container img {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	z-index: -1;
 	filter: grayscale(75%) brightness(30%);
 	transition: 0.2s;
 	border-radius: 18px;
@@ -112,6 +80,56 @@ body {
 .site-container h2 {
 	font-size: 16pt;
 	line-height: 1.1;
+}
+
+.rgb-container {
+	position: absolute;
+	inset: 0;
+	isolation: isolate;
+}
+.rgb-container div {
+	position: absolute;
+	inset: 0;
+	mix-blend-mode: screen;
+	transition: transform 0.3s;
+	border-radius: 18px;
+	transform: translate(0, 0);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.r {
+	background-color: #FF0000;
+	isolation: isolate;
+	border: 3px solid #FF0000;
+	color: #FF0000;
+}
+.gb {
+	background-color: #00FFFF;
+	isolation: isolate;
+	border: 3px solid #00FFFF;
+	color: #00FFFF;
+}
+.rgb-container img {
+	position: absolute;
+	inset: 0;
+	border-radius: 18px;
+	mix-blend-mode: multiply;
+	filter: grayscale(75%) brightness(30%);
+	transition: filter: 0.3s;
+}
+.rgb-container p {
+	mix-blend-mode: screen;
+}
+
+*:hover > .rgb-container .r {
+	transform: translate(-3px, -3px);
+}
+*:hover > .rgb-container .gb {
+	transform: translate(3px, 3px);
+}
+*:hover > .rgb-container img {
+	filter: grayscale(25%) brightness(70%);
 }
 
 #mike {
