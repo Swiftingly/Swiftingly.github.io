@@ -50,7 +50,7 @@ body {
 	color: white;
 	text-decoration: none;
 	user-select: none;
-	transition: 0.6s;
+	transition: 0.4s;
 }
 .site-container:hover {
 	transform: scale(1.1, 1.1);
@@ -91,7 +91,7 @@ body {
 	position: absolute;
 	inset: 0;
 	mix-blend-mode: screen;
-	transition: transform 0.6s;
+	transition: transform 0.4s;
 	border-radius: 18px;
 	transform: translate(0, 0);
 	display: flex;
@@ -116,7 +116,7 @@ body {
 	border-radius: 18px;
 	mix-blend-mode: multiply;
 	filter: grayscale(75%) brightness(30%);
-	transition: filter 0.6s;
+	transition: filter 0.4s;
 }
 .rgb-container p {
 	mix-blend-mode: screen;
@@ -129,7 +129,7 @@ body {
 	transform: translate(3px, 3px);
 }
 *:hover > .rgb-container img {
-	filter: grayscale(0%) brightness(70%);
+	filter: grayscale(15%) brightness(70%);
 }
 
 #mike {
