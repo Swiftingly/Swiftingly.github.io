@@ -7,6 +7,15 @@ html {
 	height: 100%;
 	margin: 0;
 }
+
+@keyframes background {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: calc(-100vh * 64 / 9) 0;
+	}
+}
 body {
 	font-family: PressStart2P;
 	font-size: 12pt;
@@ -19,11 +28,52 @@ body {
 	
 	background: url("/assets/background.png");
 	background-size: auto 100%;
-	background-repeat: no-repeat;
+	background-repeat: repeat-x;
     background-position: center center;
 	background-color: black;
 	text-align: center;
+	
+	animation: 16s linear infinite background;
 }
+
+/*@keyframes background1 {
+	from {
+		transform: translate(calc(50vw - 50%), 0);
+	}
+	to {
+		transform: translate(calc(50vw - 150%), 0);
+	}
+}
+@keyframes background2 {
+	from {
+		transform: translate(calc(50vw + 50%), 0);
+	}
+	to {
+		transform: translate(calc(50vw - 50%), 0);
+	}
+}
+#background1 {
+	position: absolute;
+	height: 100%;
+	aspect-ratio: 3840 / 1080;
+	background: url("/assets/background.png");
+	background-size: cover;
+	background-repeat: repeat-x;
+	background-position: center center;
+	
+	animation: 8s linear infinite background1;
+}
+#background2 {
+	position: absolute;
+	height: 100%;
+	aspect-ratio: 3840 / 1080;
+	background: url("/assets/background.png");
+	background-size: cover;
+	background-repeat: repeat-x;
+	background-position: center center;
+	
+	animation: 8s linear infinite background2;
+}*/
 
 .container {
 	display: flex;
@@ -31,7 +81,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	margin: 0 auto;
-	padding-top: 120px;
+	padding-top: 40px;
 	width: 1000px;
 }
 .site-container {
@@ -59,17 +109,17 @@ body {
 	z-index: 1;
 }
 
-.site-container img {
+/*.site-container img {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	filter: grayscale(75%) brightness(30%);
-	transition: 0.2s;
+	transition: 0.4s;
 	border-radius: 18px;
 }
 .site-container:hover img {
 	filter: grayscale(25%) brightness(70%);
-}
+}*/
 .site-container p {
 	font-size: 12pt;
 	line-height: 1.1;
@@ -112,7 +162,8 @@ body {
 }
 .rgb-container img {
 	position: absolute;
-	inset: 0;
+	width: 100%;
+	height: 100%;
 	border-radius: 18px;
 	mix-blend-mode: multiply;
 	filter: grayscale(75%) brightness(30%);
@@ -122,11 +173,28 @@ body {
 	mix-blend-mode: screen;
 }
 
+@keyframes sway {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(4px, 4px);
+	}
+}
+@keyframes sway2 {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(-4px, -4px);
+	}
+}
+
 *:hover > .rgb-container .r {
-	transform: translate(-3px, -3px);
+	animation: 0.5s ease-in-out 0s infinite alternate sway;
 }
 *:hover > .rgb-container .gb {
-	transform: translate(3px, 3px);
+	animation: 1s ease-in-out infinite alternate sway2;
 }
 *:hover > .rgb-container img {
 	filter: grayscale(15%) brightness(70%);
