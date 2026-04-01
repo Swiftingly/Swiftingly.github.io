@@ -105,8 +105,14 @@ body {
 .site-container:hover {
 	transform: scale(1.1, 1.1);
 }
-.site-container p, .site-container h2 {
+.site-container p, .site-container h2, .site-container span {
+	text-shadow: 0px 0px 3px transparent;
+	transition: text-shadow 0.4s;
+	
 	z-index: 1;
+}
+.site-container:hover p, .site-container:hover h2, .site-container:hover span {
+	text-shadow: 0px 0px 3px black;
 }
 
 /*.site-container img {
@@ -191,7 +197,7 @@ body {
 }
 
 *:hover > .rgb-container .r {
-	animation: 0.5s ease-in-out 0s infinite alternate sway;
+	animation: 0.5s ease-in-out infinite alternate sway;
 }
 *:hover > .rgb-container .gb {
 	animation: 1s ease-in-out infinite alternate sway2;
