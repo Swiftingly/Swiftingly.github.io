@@ -1,7 +1,7 @@
 const TANK_LIST = [ "Mauga", "Orisa", "Roadhog", "Zarya", "D.Va", "Doomfist", "Hazard", "Winston", "Wrecking Ball", "Domina", "Junker Queen", "Ramattra", "Reinhardt", "Sigma" ].sort();
 const DAMAGE_LIST = [ "Anran", "Genji", "Reaper", "Tracer", "Vendetta", "Venture", "Echo", "Freja", "Pharah", "Sombra", "Ashe", "Cassidy", "Hanzo", "Sojourn", "Widowmaker", "Bastion", "Emre", "Junkrat", "Mei", "Soldier: 76", "Symmetra", "Torbjörn" ].sort();
 const SUPPORT_LIST = [ "Kiriko", "Lifeweaver", "Mercy", "Moira", "Brigitte", "Illari", "Juno", "Mizuki", "Wuyang", "Ana", "Baptiste", "Jetpack Cat", "Lúcio", "Zenyatta" ].sort();
-
+const FULL_LIST = [...TANK_LIST, ...DAMAGE_LIST, ...SUPPORT_LIST].sort();
 
 var tankCategory = document.getElementById("tank");
 var damageCategory = document.getElementById("damage");
@@ -19,6 +19,11 @@ var heroTypeMap = new Map();
 var heroIncludeMap = new Map();
 var toggleMap = new Map();
 
+var disabledMap = new Map();
+for (var name of FULL_LIST) {
+	disabledMap.set(name, false);
+}
+
 function ListRemove(list, item) {
 	let index = list.indexOf(item);
 	if (index != -1) list.splice(index, 1);
@@ -34,8 +39,26 @@ function StartSave() {
 		saving = true;
 		setTimeout(function() {
 			saving = false;
-			localStorage.setItem("overwatch-random-hero-save", unincluded_all.join(','));
-		}, 500);
+			
+			if (unincluded_all.length == 0) {
+				window.history.replaceState(null, '', window.location.origin + window.location.pathname);
+				return;
+			}
+			var size = Math.ceil(FULL_LIST.length / 8);
+			var saveArray = new Uint8Array(size);
+		
+			var value = 0;
+			var index = 0;
+			for (var i = 0; i < FULL_LIST.length; i++) {
+				value += disabledMap.get(FULL_LIST[i]) << (i % 8)
+				if (i % 8 == 7) {
+					saveArray[Math.floor(i / 8)] = value;
+					value = 0;
+				}
+			}
+			saveArray[size - 1] = value;
+			window.history.replaceState(null, '', `?disabled=${saveArray.toBase64({ alphabet: "base64url" })}`);
+		}, 100);
 	}
 }
 
@@ -52,12 +75,16 @@ function ToggleInclusion(name, save = true) {
 		included_list.push(name);
 		ListRemove(unincluded_all, name);
 		portrait.classList.remove("hero-container-off");
+		
+		disabledMap.set(name, false);
 	}
 	else {
 		included_all.splice(index, 1);
 		included_list.splice(included_list.indexOf(name), 1);
 		unincluded_all.push(name);
 		portrait.classList.add("hero-container-off");
+		
+		disabledMap.set(name, true);
 	}
 	
 	toggle.checked = included_list.length > 0;
@@ -154,10 +181,25 @@ CategoryFill(tankCategory, TANK_LIST, 'tank', included_tank, 'tank-toggle');
 CategoryFill(damageCategory, DAMAGE_LIST, 'damage', included_damage, 'damage-toggle');
 CategoryFill(supportCategory, SUPPORT_LIST, 'support', included_support, 'support-toggle');
 
-var save = localStorage.getItem("overwatch-random-hero-save");
-if (save != null && save.length > 0) {
-	for (name of save.split(',')) {
-		ToggleInclusion(name, false);
+// Load
+const params = new URLSearchParams(window.location.search);
+var paramsDisabled = params.get('disabled');
+if (paramsDisabled != null) {
+	try {
+		var array = Uint8Array.fromBase64(paramsDisabled, { alphabet: "base64url" });
+		if (array.length == Math.ceil(FULL_LIST.length / 8)) {
+			var value = array[0];
+			for (var i = 0; i < FULL_LIST.length; i++) {
+				if (value & 1) ToggleInclusion(FULL_LIST[i], false);
+				value >>= 1;
+				if (i % 8 == 7) {
+					value = array[Math.floor(i / 8) + 1];
+				}
+			}
+		}
+	}
+	catch (error) {
+		
 	}
 }
 

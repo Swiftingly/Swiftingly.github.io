@@ -2,6 +2,7 @@ const INITIATOR_LIST = [ "Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Te
 const DUELIST_LIST = [ "Phoenix", "Jett", "Reyna", "Raze", "Yoru", "Neon", "Iso", "Waylay" ].sort();
 const SENTINEL_LIST = [ "Killjoy", "Cypher", "Sage", "Chamber", "Deadlock", "Vyse", "Veto" ].sort();
 const CONTROLLER_LIST = [ "Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove", "Miks" ].sort();
+const FULL_LIST = [...INITIATOR_LIST, ...DUELIST_LIST, ...SENTINEL_LIST, ...CONTROLLER_LIST].sort();
 
 var initiatorCategory = document.getElementById("initiator");
 var duelistCategory = document.getElementById("duelist");
@@ -21,6 +22,11 @@ var agentTypeMap = new Map();    // NAME -> TYPE
 var agentIncludeMap = new Map(); // NAME -> LIST
 var toggleMap = new Map();       // TYPE -> TOGGLE
 
+var disabledMap = new Map();
+for (var name of FULL_LIST) {
+	disabledMap.set(name, false);
+}
+
 function ListRemove(list, item) {
 	let index = list.indexOf(item);
 	if (index != -1) list.splice(index, 1);
@@ -36,8 +42,26 @@ function StartSave() {
 		saving = true;
 		setTimeout(function() {
 			saving = false;
-			localStorage.setItem("valorant-random-agent-save", unincluded_all.join(','));
-		}, 500);
+			
+			if (unincluded_all.length == 0) {
+				window.history.replaceState(null, '', window.location.origin + window.location.pathname);
+				return;
+			}
+			var size = Math.ceil(FULL_LIST.length / 8);
+			var saveArray = new Uint8Array(size);
+		
+			var value = 0;
+			var index = 0;
+			for (var i = 0; i < FULL_LIST.length; i++) {
+				value += disabledMap.get(FULL_LIST[i]) << (i % 8)
+				if (i % 8 == 7) {
+					saveArray[Math.floor(i / 8)] = value;
+					value = 0;
+				}
+			}
+			saveArray[size - 1] = value;
+			window.history.replaceState(null, '', `?disabled=${saveArray.toBase64({ alphabet: "base64url" })}`);
+		}, 100);
 	}
 }
 
@@ -54,12 +78,16 @@ function ToggleInclusion(name, save = true) {
 		included_list.push(name);
 		ListRemove(unincluded_all, name);
 		portrait.classList.remove("agent-container-off");
+		
+		disabledMap.set(name, false);
 	}
 	else {
 		included_all.splice(index, 1);
 		included_list.splice(included_list.indexOf(name), 1);
 		unincluded_all.push(name);
 		portrait.classList.add("agent-container-off");
+		
+		disabledMap.set(name, true);
 	}
 	
 	toggle.checked = included_list.length > 0;
@@ -151,10 +179,25 @@ CategoryFill(duelistCategory, DUELIST_LIST, 'duelist', included_duelist, 'duelis
 CategoryFill(sentinelCategory, SENTINEL_LIST, 'sentinel', included_sentinel, 'sentinel-toggle');
 CategoryFill(controllerCategory, CONTROLLER_LIST, 'controller', included_controller, 'controller-toggle');
 
-var save = localStorage.getItem("valorant-random-agent-save");
-if (save != null && save.length > 0) {
-	for (name of save.split(',')) {
-		ToggleInclusion(name, false);
+// Load
+const params = new URLSearchParams(window.location.search);
+var paramsDisabled = params.get('disabled');
+if (paramsDisabled != null) {
+	try {
+		var array = Uint8Array.fromBase64(paramsDisabled, { alphabet: "base64url" });
+		if (array.length == Math.ceil(FULL_LIST.length / 8)) {
+			var value = array[0];
+			for (var i = 0; i < FULL_LIST.length; i++) {
+				if (value & 1) ToggleInclusion(FULL_LIST[i], false);
+				value >>= 1;
+				if (i % 8 == 7) {
+					value = array[Math.floor(i / 8) + 1];
+				}
+			}
+		}
+	}
+	catch (error) {
+		
 	}
 }
 
