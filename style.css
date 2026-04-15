@@ -13,7 +13,7 @@ html {
 		background-position: 0 0;
 	}
 	to {
-		background-position: calc(-100vh * 64 / 9) 0;
+		background-position: calc(-100vh * 32 / 9) 0;
 	}
 }
 body {
@@ -33,7 +33,7 @@ body {
 	background-color: black;
 	text-align: center;
 	
-	animation: 16s linear infinite background;
+	animation: 8s linear infinite background;
 }
 
 /*@keyframes background1 {
